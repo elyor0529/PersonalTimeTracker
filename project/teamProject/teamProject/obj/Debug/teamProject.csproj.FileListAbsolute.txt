@@ -1,0 +1,18 @@
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\bin\Debug\teamProject.exe.config
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\bin\Debug\teamProject.exe
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\bin\Debug\teamProject.pdb
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\bin\Debug\Newtonsoft.Json.dll
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\bin\Debug\Newtonsoft.Json.xml
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\obj\Debug\teamProject.csprojResolveAssemblyReference.cache
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\obj\Debug\teamProject.exe
+c:\users\aungk02\documents\visual studio 2015\Projects\teamProject\teamProject\obj\Debug\teamProject.pdb
+D:\teamProject\teamProject\bin\Debug\teamProject.exe.config
+D:\teamProject\teamProject\bin\Debug\teamProject.exe
+D:\teamProject\teamProject\bin\Debug\teamProject.pdb
+D:\teamProject\teamProject\bin\Debug\Newtonsoft.Json.dll
+D:\teamProject\teamProject\bin\Debug\Newtonsoft.Json.xml
+D:\teamProject\teamProject\obj\Debug\teamProject.csprojAssemblyReference.cache
+D:\teamProject\teamProject\obj\Debug\teamProject.csproj.CoreCompileInputs.cache
+D:\teamProject\teamProject\obj\Debug\teamProject.csproj.CopyComplete
+D:\teamProject\teamProject\obj\Debug\teamProject.exe
+D:\teamProject\teamProject\obj\Debug\teamProject.pdb
