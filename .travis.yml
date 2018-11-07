@@ -1,0 +1,7 @@
+go_import_path: acs560_course_project
+language: go
+install: true
+go:
+  - "1.11"
+
+script: (pwd && ls ${TRAVIS_HOME} && ls ${TRAVIS_HOME}/gopath/src && ls ${TRAVIS_HOME}/gopath/src/acs560_course_project) || go test ./...
