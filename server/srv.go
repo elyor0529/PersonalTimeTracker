@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"acs560_course_project/server/businesslogic"
 )
-
 func main() {
 	http.HandleFunc("/", Hey)
 	http.HandleFunc("/newUnauthorizedSession", newUnauthorizedSessionHandler)
