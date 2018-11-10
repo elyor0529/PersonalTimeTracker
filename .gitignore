@@ -1,0 +1,4 @@
+project/teamProject/packages/**
+**/testResult.xml
+project/teamProject/teamProject/bin/**
+project/teamProject/teamProject/obj/**

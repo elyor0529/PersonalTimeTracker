@@ -17,7 +17,7 @@ namespace teamProject
 
 
             ServerProxy s = new ServerProxy();
-            Login j = new Login
+            LoginData j = new LoginData
             {
                 UserName = "Jalpesh",
                 Email = "Vadgama",
