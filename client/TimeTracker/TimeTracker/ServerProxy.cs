@@ -62,7 +62,7 @@ namespace timetracker
             Console.ReadLine();
         }
 
-        public async Task postLogin(LoginData message)
+       /* public async Task postLogin(LoginData message)
         {
             System.IO.MemoryStream stream = new System.IO.MemoryStream();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(LoginData));
@@ -70,7 +70,7 @@ namespace timetracker
             string a = stream.ToString();
             HttpContent httpContent = new StreamContent(stream);
             var content = await httpClient.PostAsync(serverURL + "/Login", httpContent);
-        }
+        }*/
 
         public async Task<SessionType> GetUnauthorizedSession()
         {
@@ -84,6 +84,12 @@ namespace timetracker
             HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
             var content = await httpClient.PostAsync(serverURL + "/Login", httpContent);
             return LoginResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+        }
+        public async Task<CreateAccountResultType> CreateAc(CreateAccount data)
+        {
+            HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+            var content = await httpClient.PostAsync(serverURL + "/CreateAccount", httpContent);
+            return CreateAccountResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
         }
 
     }

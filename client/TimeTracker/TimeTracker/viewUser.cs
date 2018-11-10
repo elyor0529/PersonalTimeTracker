@@ -25,12 +25,12 @@ namespace timetracker
         {
             
             
-            proxy.sendRequest().Wait();
+            //proxy.sendRequest().Wait();
 
         }
         public void sendInfo(LoginData u) {
 
-            proxy.postLogin(u).Wait();
+            //proxy.postLogin(u).Wait();
 
 
         }

@@ -53,7 +53,20 @@ namespace timetracker
             });
             Assert.AreEqual("Success", loginResultType.LoginResult);
         }
-
+        [TestCase]
+        public async Task CreateAccountForm()
+        {
+            CreateAccountResultType createAccountResult = await serverProxy.CreateAc(new CreateAccount()
+            {
+                FirstName = "Blah",
+                MiddleName = "Blah",
+                LatName ="Blah",
+                Email = "email",
+                Password = "password",
+                SessionKey = "zaaaaaa"
+            });
+            Assert.AreEqual("Success", createAccountResult.CreateAccountResult);
+        }
         [OneTimeTearDown]
         public void TearDown()
         {

@@ -12,6 +12,8 @@ namespace timetracker
 {
     public partial class Login : Form
     {
+       
+        private SessionType sessionObj;
         public Login()
         {
             InitializeComponent();
@@ -28,32 +30,19 @@ namespace timetracker
             }
             email = txtEmail.Text;
             password = txtPassword.Text;
-            LoginData u = new LoginData()
+            LoginData Login = new LoginData()
             {
                 Email = email,
                 UserName = password
             };
-            ServerProxy view = new ServerProxy();
 
-            await view.sendRequest();
-
-            await view.postLogin(u);
+            sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
+            Login.SessionKey = sessionObj.Session;
 
             
         }
-
-        /*private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Login
-            // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Name = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
-            this.ResumeLayout(false);
-
-        }*/
+        
+        
 
 
     }
