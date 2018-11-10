@@ -1,4 +1,4 @@
-project/teamProject/packages/**
+client/TimeTracker/packages/**
 **/testResult.xml
-project/teamProject/teamProject/bin/**
-project/teamProject/teamProject/obj/**
+client/TimeTracker/TimeTracker/bin/**
+client/TimeTracker/TimeTracker/obj/**
