@@ -12,10 +12,14 @@ namespace timetracker
     [DataContract]
     public sealed class LoginData
     {
-        [DataMember]
         public string UserName { get; set; }
+
         [DataMember]
         public string Email { get; set; }
+
+        [DataMember]
+        public string Password { get; set; }
+
         [DataMember]
         public string SessionKey { get; set; }
 

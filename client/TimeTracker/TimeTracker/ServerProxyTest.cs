@@ -18,13 +18,17 @@ namespace timetracker
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            Console.WriteLine("Server binary path: " + Path.Combine(
-            Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
-            "server.exe"));
+            Console.WriteLine("Server binary path: " + 
+            Directory.GetParent(
+            System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase)
+            .Parent.Parent.Parent.FullName,
+            "server.exe");
 
             server = Process.Start(
             Path.Combine(
-            Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
+            Directory.GetParent(
+            System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase)
+            .Parent.Parent.Parent.FullName,
             "server.exe"));
 
             serverProxy = new ServerProxy();
@@ -41,8 +45,13 @@ namespace timetracker
         [TestCase]
         public async Task TestLogin()
         {
-            SessionType session = await serverProxy.GetUnauthorizedSession();
-            Assert.AreEqual(30, session.getSessionKey().Length);
+            LoginResultType loginResultType = await serverProxy.LogIn(new LoginData()
+            {
+                Email = "email",
+                Password = "password",
+                SessionKey = "zaaaaaa"
+            });
+            Assert.AreEqual("Success", loginResultType.LoginResult);
         }
 
         [OneTimeTearDown]

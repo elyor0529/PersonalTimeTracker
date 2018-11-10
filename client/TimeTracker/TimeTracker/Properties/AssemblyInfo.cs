@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("teamProject")]
+[assembly: AssemblyTitle("TimeTracker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Indiana University-Purdue University Fort Wayne")]
-[assembly: AssemblyProduct("teamProject")]
+[assembly: AssemblyProduct("TimeTracker")]
 [assembly: AssemblyCopyright("Copyright © Indiana University-Purdue University Fort Wayne 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
