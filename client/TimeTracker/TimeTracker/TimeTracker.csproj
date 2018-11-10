@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F57CA774-8214-42B2-B3AA-A595B9B41681}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TimeTracker</RootNamespace>
     <AssemblyName>TimeTracker</AssemblyName>
@@ -38,13 +38,18 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginData.cs" />
     <Compile Include="LoginResult.cs" />
     <Compile Include="Program.cs" />
@@ -60,6 +71,9 @@
     <Compile Include="ServerProxy.cs" />
     <Compile Include="ServerProxyTest.cs" />
     <Compile Include="SessionType.cs" />
+    <Compile Include="startLogin.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="viewUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,6 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
