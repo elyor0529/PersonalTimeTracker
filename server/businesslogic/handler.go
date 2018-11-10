@@ -71,5 +71,8 @@ func CreateAccountHandler ( writer http.ResponseWriter, requestPtr *http.Request
   if  error != nil  {
 		log.Printf( "error %s\n", error.Error() );
 	}
-  io.WriteString(writer, "success");
+  createAccountResultPtr := new(CreateAccountResult)
+  createAccountResultPtr.CreateAccountResult = "Success"
+  jsonByteArr, error := json.Marshal( createAccountResultPtr )
+  writer.Write ( jsonByteArr )
 }
