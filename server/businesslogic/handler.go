@@ -63,3 +63,13 @@ func LogUserIn ( writer http.ResponseWriter, requestPtr *http.Request ) {
   jsonByteArr, error := json.Marshal( loginResultPtr )
   writer.Write ( jsonByteArr )
 } 
+
+func CreateAccountHandler ( writer http.ResponseWriter, requestPtr *http.Request ) {
+  var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+	body, error := ioutil.ReadAll( bodyIncompleteReader )
+  fmt.Printf("len is %d\n",len(body))
+  if  error != nil  {
+		log.Printf( "error %s\n", error.Error() );
+	}
+  io.WriteString(writer, "success");
+}
