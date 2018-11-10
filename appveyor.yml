@@ -5,7 +5,7 @@ environment:
 install:
 - nuget restore %APPVEYOR_BUILD_FOLDER%\client\TimeTracker
 cache:
-- project\TimeTracker\packages -> **\packages.config
+- client\TimeTracker\packages -> **\packages.config
 before_build:
 - cd %APPVEYOR_BUILD_FOLDER%\server && go build
 - cd %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker
