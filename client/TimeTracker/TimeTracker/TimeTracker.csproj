@@ -8,8 +8,8 @@
     <ProjectGuid>{F57CA774-8214-42B2-B3AA-A595B9B41681}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>teamProject</RootNamespace>
-    <AssemblyName>teamProject</AssemblyName>
+    <RootNamespace>TimeTracker</RootNamespace>
+    <AssemblyName>TimeTracker</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
