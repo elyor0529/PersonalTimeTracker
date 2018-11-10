@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
-namespace teamProject
+namespace timetracker
 {
     [DataContract]
     public class SessionType

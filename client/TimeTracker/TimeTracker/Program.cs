@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 
 
-namespace teamProject
+namespace timetracker
 {
     class Program
     {

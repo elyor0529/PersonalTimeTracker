@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 
-namespace teamProject
+namespace timetracker
 {
     public class ServerProxy
     {

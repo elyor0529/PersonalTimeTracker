@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 
-namespace teamProject
+namespace timetracker
 {
     [DataContract]
     public sealed class LoginResultType

@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 using System.Runtime.Serialization.Json;
 
-namespace teamProject
+namespace timetracker
 {
     [DataContract]
     public sealed class LoginData

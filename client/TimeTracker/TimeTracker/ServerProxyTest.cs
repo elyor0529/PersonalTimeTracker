@@ -6,7 +6,7 @@ using System.IO;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 
-namespace teamProject
+namespace timetracker
 {
     class ServerProxyTest
     {

@@ -1,0 +1,9 @@
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\teamProject.exe.config
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\teamProject.exe
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\teamProject.pdb
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\nunit.framework.dll
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\nunit.framework.pdb
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\bin\Debug\nunit.framework.xml
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\obj\Debug\TimeTracker.csprojResolveAssemblyReference.cache
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\obj\Debug\teamProject.exe
+C:\Users\ngtro\go\src\acs560_course_project\client\TimeTracker\TimeTracker\obj\Debug\teamProject.pdb
