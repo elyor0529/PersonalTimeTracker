@@ -1,9 +1,12 @@
 version: 1.0.{build}
 clone_folder: c:\gopath\src\acs560_course_project
+clone_depth: 1
 environment:
   GOPATH: c:\gopath
+cache:
+- client\TimeTracker\packages -> **\packages.config
 install:
-- nuget restore %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker\packages.config -OutputDirectory %APPVEYOR_BUILD_FOLDER%\client\TimeTracker
+- nuget restore %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker\packages.config -OutputDirectory %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\packages
 before_build:
 - cd %APPVEYOR_BUILD_FOLDER%\server && go build
 - cd %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker
