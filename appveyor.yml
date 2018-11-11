@@ -3,6 +3,8 @@ clone_folder: c:\gopath\src\acs560_course_project
 clone_depth: 1
 environment:
   GOPATH: c:\gopath
+services:
+  - postgresql101
 cache:
 - client\TimeTracker\packages -> **\packages.config
 install:
@@ -15,6 +17,7 @@ before_build:
 - SET PGPASSWORD=Password12!
 - PATH=C:\Program Files\PostgreSQL\9.6\bin\;%PATH%
 - ps: Invoke-WebRequest "https://www.dropbox.com/s/s0d3a8y97aznbic/sandbox.sql?dl=0" -OutFile sandbox.sql
+- createdb sandbox
 - psql -d sandbox -a -f sandbox.sql
 - cd %APPVEYOR_BUILD_FOLDER%\server && go build
 - cd %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker
