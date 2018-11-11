@@ -8,6 +8,9 @@ cache:
 install:
 - nuget restore %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker\packages.config -OutputDirectory %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\packages
 before_build:
+- go get github.com/jinzhu/gorm
+- go get github.com/go-sql-driver/mysql
+- go get github.com/lib/pq
 - cd %APPVEYOR_BUILD_FOLDER%\server && go build
 - cd %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker
 - copy %APPVEYOR_BUILD_FOLDER%\server\server.exe %APPVEYOR_BUILD_FOLDER%\client\TimeTracker
