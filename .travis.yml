@@ -4,4 +4,4 @@ install: true
 go:
   - "1.11"
 
-script: go get github.com/jinzhu/gorm && go get github.com/go-sql-driver/mysql && go get github.com/lib/pq && go test ./... && go build
+script: go get github.com/jinzhu/gorm && go get github.com/go-sql-driver/mysql && go get github.com/lib/pq && go test ./... && cd server && go build
