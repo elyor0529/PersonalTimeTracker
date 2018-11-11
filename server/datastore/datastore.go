@@ -25,7 +25,7 @@ func SetUpOrm(databaseVendor *string,
     log.Println(connectionString)
     globalOrm, err = gorm.Open(*databaseVendor, connectionString)
   } else if *databaseVendor == "postgres" {
-    var connectionString = "host=" + *hostName + "port=" + *hostPort + "user=" + *userName + "dbname=" + *onlineDbName + "password=" + *password
+    var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
     log.Println(connectionString)
     globalOrm, err = gorm.Open(*databaseVendor, connectionString)
   }
