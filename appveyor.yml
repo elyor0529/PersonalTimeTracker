@@ -16,7 +16,7 @@ before_build:
 - SET PGUSER=postgres
 - SET PGPASSWORD=Password12!
 - PATH=C:\Program Files\PostgreSQL\9.6\bin\;%PATH%
-- ps: Invoke-WebRequest "https://www.dropbox.com/s/s0d3a8y97aznbic/sandbox.sql?dl=0" -OutFile sandbox.sql
+- ps: Invoke-WebRequest "https://dl.dropbox.com/s/s0d3a8y97aznbic/sandbox.sql" -OutFile sandbox.sql
 - createdb sandbox
 - psql -d sandbox -a -f sandbox.sql
 - cd %APPVEYOR_BUILD_FOLDER%\server && go build
