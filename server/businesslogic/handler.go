@@ -1,11 +1,11 @@
 package businesslogic 
 import (
-	"net/http"
+	"encoding/json"
+  "fmt"
 	"io"
 	"io/ioutil"
-	"encoding/json"
 	"log"
-  "fmt"
+	"net/http"
 )
 
 func Hey ( writer http.ResponseWriter, requestPtr *http.Request ) {
@@ -23,7 +23,7 @@ func NewUnauthorizedSessionHandler ( writer http.ResponseWriter, requestPtr *htt
 }
 
 func NewAuthorizedSessionHandler ( writer http.ResponseWriter, requestPtr *http.Request ) {
-	var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+  var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
 	body, error := ioutil.ReadAll( bodyIncompleteReader )
 	var incomingSession IncomingSession
 	error = json.Unmarshal( body, incomingSession )
@@ -38,7 +38,6 @@ func NewUserHandler ( writer http.ResponseWriter, requestPtr *http.Request ) {
 
 func LogUserIn ( writer http.ResponseWriter, requestPtr *http.Request ) {
   fmt.Println("Log User In")
-  //requestPtr.parseForm()
   
   fmt.Println(requestPtr.Body)
   fmt.Println()
@@ -48,15 +47,6 @@ func LogUserIn ( writer http.ResponseWriter, requestPtr *http.Request ) {
   if  error != nil  {
 		log.Printf( "error %s\n", error.Error() );
 	}
-  /*for i := 0; i < len(body); i++{
-    fmt.Printf("%c", body[i])
-  }
-  fmt.Println("")
-  var incomingUserLoginBox userLoginRequest
-  //error = json.Unmarshal( body, incomingUserLoginBox )
-  fmt.Println("error" + error.Error())
-  log.Println("hello" + incomingUserLoginBox.UserName);*/
-  
   
   loginResultPtr := new(LoginResult)
   loginResultPtr.LoginResult = "Success"

@@ -1,10 +1,10 @@
 package datastore
 
 import (
-  "testing"
   "net/http"
   "net/http/httptest"
   "os"
+  "testing"
 )
 
 var database = os.Getenv("acs_database")

@@ -1,8 +1,8 @@
 package datastore
+
 import (
-    "github.com/jinzhu/gorm"
+  "github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/mysql"
-//  _ "github.com/jinzhu/gorm/dialects/sqlite"
   _ "github.com/jinzhu/gorm/dialects/postgres"
   "log"
 )
@@ -13,9 +13,9 @@ type datastore struct{
 
 var globalOrm *gorm.DB
 func SetUpOrm(databaseVendor *string, 
-                          userName *string, password *string, 
-                          hostName *string, hostPort *string,
-                          offlineDatabasePath *string, onlineDbName *string) bool {
+  userName *string, password *string, 
+  hostName *string, hostPort *string,
+  offlineDatabasePath *string, onlineDbName *string) bool {
   var err error
   globalOrm = nil
   if *databaseVendor == "sqlite"{

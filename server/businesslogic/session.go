@@ -1,4 +1,5 @@
 package businesslogic
+
 import (
 	"math/rand"
 )
@@ -32,7 +33,6 @@ type sessionType struct {
 func getNewUnauthorizedSession() *sessionType{
 	newSession := new(sessionType)
 	newSession.Session = generateUniqueSessionId()
-	//log.Printf( " inside session.go %s\n", string( newSession.Session ) )
 	return newSession
 }
 
