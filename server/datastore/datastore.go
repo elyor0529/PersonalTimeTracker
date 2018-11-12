@@ -31,7 +31,7 @@ func SetUpOrm(databaseVendor *string,
     var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
     log.Println(connectionString)
     //globalOrm.orm, err = gorm.Open(*databaseVendor, connectionString)
-		globalOrm.orm, err = sql.Open( "postgres", "user=postgres dbname=sandbox password=123 sslmode=disable")
+		globalOrm.orm, err = sql.Open( "postgres", connectionString)
 
   }
   
