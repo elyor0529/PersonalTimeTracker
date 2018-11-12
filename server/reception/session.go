@@ -1,4 +1,4 @@
-package businesslogic
+package reception
 
 import (
 	"math/rand"
@@ -40,7 +40,7 @@ func generateUniqueSessionId() []byte {
 	var result [sessionStringLength]byte
 
 	for i := 0; i < sessionStringLength; i++ {
-		result[i] = repository[rand.Intn(36)]
+		result [ i ] = repository [ rand.Intn ( 35 ) ]
 	}
 	return result[:]
 }

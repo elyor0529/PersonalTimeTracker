@@ -1,5 +1,4 @@
-package businesslogic
-
+package reception 
 import (
 	"encoding/json"
 	"flag"

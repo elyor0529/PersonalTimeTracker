@@ -1,26 +1,28 @@
 package businesslogic
 
-type userLoginRequest struct {
-	UserName   string
-	Email      string
-	SessionKey string
+type LoginRequestData struct {
+  Email string
+	Password string
+	TimeZone int
+  SessionKey string
 }
 
-type LoginResult struct {
-	LoginResult string
-	SessionKey  string
+type LoginRequestResult struct{
+  LoginResult string
+  SessionKey string
 }
 
-type CreateAccountRequest struct {
-	FirstName  string
-	MiddleName string
-	LastName   string
-	Email      string
-	Password   string
-	SessionKey string
+type CreateAccountRequestData struct {
+  FirstName string
+  MiddleName string
+  LastName string
+  Email string
+  Password string
+	TimeZone int
+  SessionKey string
 }
 
-type CreateAccountResult struct {
-	CreateAccountResult string
-	SessionKey          string
+type CreateAccountRequestResult struct {
+  CreateAccountResult string
+  SessionKey string
 }

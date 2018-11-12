@@ -1,40 +1,44 @@
 package datastore
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"log"
+
+  "log"
+	"database/sql"
+	_ "github.com/lib/pq"
 )
 
-type datastore struct {
-	orm *gorm.DB
+type datastore struct{
+  orm *sql.DB
 }
 
-var globalOrm *gorm.DB
-
-func SetUpOrm(databaseVendor *string,
-	userName *string, password *string,
-	hostName *string, hostPort *string,
-	offlineDatabasePath *string, onlineDbName *string) bool {
-	var err error
-	globalOrm = nil
-	if *databaseVendor == "sqlite" {
-		globalOrm, err = gorm.Open(*databaseVendor, *offlineDatabasePath)
-	} else if *databaseVendor == "mysql" {
-		var connectionString = *userName + ":" + *password + "@/" + *onlineDbName + "?charset=utf8&parseTime=True&loc=Local"
-		log.Println(connectionString)
-		globalOrm, err = gorm.Open(*databaseVendor, connectionString)
-	} else if *databaseVendor == "postgres" {
-		var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
-		log.Println(connectionString)
-		globalOrm, err = gorm.Open(*databaseVendor, connectionString)
+var globalOrm *datastore = nil
+func SetUpOrm(databaseVendor *string, 
+  userName *string, password *string, 
+  hostName *string, hostPort *string,
+  offlineDatabasePath *string, onlineDbName *string) bool {
+	if globalOrm != nil {
+		return true
 	}
+  var err error
+  globalOrm = new(datastore)
+  if *databaseVendor == "sqlite"{
+    //globalOrm.orm, err = gorm.Open(*databaseVendor, *offlineDatabasePath)
+  } else if *databaseVendor == "mysql"{
+    var connectionString = *userName + ":" + *password + "@/" + *onlineDbName + "?charset=utf8&parseTime=True&loc=Local"
+    log.Println(connectionString)
+    //globalOrm.orm, err = gorm.Open(*databaseVendor, connectionString)
+  } else if *databaseVendor == "postgres" {
+    var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
+    log.Println(connectionString)
+    //globalOrm.orm, err = gorm.Open(*databaseVendor, connectionString)
+		globalOrm.orm, err = sql.Open( "postgres", "user=postgres dbname=sandbox password=123 sslmode=disable")
 
-	if err != nil {
-		log.Println("error while connecting to the database: " + err.Error())
-		return false
-	}
+  }
+  
+  if err != nil {
+    log.Println("error while connecting to the database: " + err.Error())
+    return false
+  }
 
-	return true
+  return true
 }
