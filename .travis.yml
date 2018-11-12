@@ -3,5 +3,7 @@ language: go
 install: true
 go:
   - "1.11"
+services:
+  - postgresql
 
-script: go get github.com/jinzhu/gorm && go get github.com/go-sql-driver/mysql && go get github.com/lib/pq && go test ./... && cd server && go build
+script: curl -o travis.sh https://dl.dropbox.com/s/i4o1dpbdyferd59/travis.sh
