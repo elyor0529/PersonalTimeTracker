@@ -26,8 +26,11 @@ func parseCmdFlagsSetUpOrm(){
   var database = flag.String("database", "postgres", "the database to use (currently supported: sqlite, mysql)")
   var databaseUserName = flag.String("dbuser", "postgres", "database's user")
   var databasePassword = flag.String("dbpassword", "123", "database's password")
+	
+	var envDatabasePassword = ""
 	if value, ok := os.LookupEnv("PGPASSWORD"); ok {
-		databasePassword = os.Getenv("PGPASSWORD")
+		envDatabasePassword = os.Getenv("PGPASSWORD")
+		databasePassword = &envDatabasePassword
 	} 
   var offlineDatabaseFile = flag.String("sqliteDbPath", ".\\data.db", "sqlite database file's path")
   var onlineDatabaseName = flag.String("dbname", "sandbox", "database name in the online datastore")
