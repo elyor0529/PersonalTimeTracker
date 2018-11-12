@@ -15,6 +15,13 @@ before_build:
 - go get github.com/lib/pq
 - SET PGUSER=postgres
 - SET PGPASSWORD=Password12!
+- SET acs_database=postgres
+- SET acs_dbuser=postgres
+- SET acs_dbpass=Password12!
+- SET acs_onlineDbNameTest=sandboxtest
+- SET acs_onlineDbName=sandbox
+- SET acs_hostname=127.0.0.1
+-SET acs_hostport=5432
 - PATH=C:\Program Files\PostgreSQL\9.6\bin\;%PATH%
 - createdb sandboxtest
 - createdb sandbox
