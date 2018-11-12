@@ -1,5 +1,7 @@
 package datastore
 import (
+	"log"
+	"errors"
 )
 type Task struct {
   taskId int

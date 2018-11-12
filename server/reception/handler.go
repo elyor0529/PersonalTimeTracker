@@ -82,16 +82,16 @@ func AddTaskHandler( writer http.ResponseWriter, requestPtr *http.Request ) {
   if  error != nil  {
 		log.Printf( "error %s\n", error.Error() );
 	}
-	var request AddTaskRequestData
+	var request businesslogic.AddTaskRequestData
 	err := json.Unmarshal( body[:],  &request)
-  var result AddTaskRequestResult
+  var result businesslogic.AddTaskRequestResult
 	if err != nil {
     log.Println(err.Error())
-		result = AddTaskRequestResult {
+		result = businesslogic.AddTaskRequestResult {
 			AddResult: "Incompatible JSON request structure.",
 		}
   }
-	result = businesslogic.AddTask(request, getEmailBySession(request.SessionKey))
+	result = businesslogic.AddTask(&request, getEmailBySession(request.SessionKey))
 	jsonByteArr, error := json.Marshal( result )
 	writer.Write ( jsonByteArr )
 }
@@ -103,12 +103,12 @@ func GetAllTasksHandler ( writer http.ResponseWriter, requestPtr *http.Request )
   if  error != nil  {
 		log.Printf( "error %s\n", error.Error() );
 	}
-	var request RetrieveTaskListRequestData
+	var request businesslogic.RetrieveTaskListRequestData
 	err := json.Unmarshal( body[:],  &request)
-  var result RetrieveTaskListRequestResult
+  var result businesslogic.RetrieveTaskListRequestResult
 	if err != nil {
     log.Println(err.Error())
-		result = AddTaskRequestResult {
+		result = businesslogic.RetrieveTaskListRequestResult {
 			RetrieveTaskListResult: "Incompatible JSON request structure.",
 			TaskList: nil,
 		}

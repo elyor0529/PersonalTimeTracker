@@ -1,33 +1,32 @@
 package businesslogic
 
 import (
-	"log"
+	"acs560_course_project/server/datastore"
 )
 
 func AddTask( request *AddTaskRequestData, sessionEmail string) AddTaskRequestResult{
-	var space string = ""
-	task := datastore.MakeTask( &(request.TaskName), &(request.TimeSpent), sessionEmail)
+	task := datastore.MakeTask( &(request.TaskName), &(request.TimeSpent), &sessionEmail)
 	err := datastore.AddTask(task)
 	if err != nil {
-		return &AddTaskRequestResult{
+		return AddTaskRequestResult{
 			AddResult : "Failure",
 		}
 	} else {
-			return &AddTaskRequestResult{
+			return AddTaskRequestResult{
 			AddResult : "Success",
 		}
 	}
 }
 
-func GetTasks( body[] byte, sessionEmail string ) {
-	result,err := SelectTasksByEmail( sessionEmail )
+func GetTasks( sessionEmail string ) RetrieveTaskListRequestResult{
+	result,err := datastore.SelectTasksByEmail( sessionEmail )
 	if err != nil {
-		return &RetrieveTaskListRequestResult {
+		return RetrieveTaskListRequestResult {
 			RetrieveTaskListResult: "Failure",
 			TaskList: nil,
 		}
 	} else {
-		return &RetrieveTaskListRequestResult {
+		return RetrieveTaskListRequestResult {
 			RetrieveTaskListResult: "Success",
 			TaskList: result[:],
 		}

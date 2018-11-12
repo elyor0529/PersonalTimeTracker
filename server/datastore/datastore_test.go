@@ -99,6 +99,7 @@ func TestGetTasks (t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
+	log.SetFlags(log.Llongfile)
 	if database=="postgres" && 
     (databaseUserName == "" || 
       databasePassword == ""  || 
