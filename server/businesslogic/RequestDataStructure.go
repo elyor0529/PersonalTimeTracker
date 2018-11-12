@@ -26,3 +26,22 @@ type CreateAccountRequestResult struct {
   CreateAccountResult string
   SessionKey string
 }
+
+type AddTaskRequestData struct {
+	TaskName string
+	TimeSpent float64
+	SessionKey string
+}
+
+type AddTaskRequestResult struct {
+	AddResult string
+}
+
+type RetrieveTaskListRequestData struct {
+	SessionKey string
+}
+
+type RetrieveTaskListRequestResult struct {
+	RetrieveTaskListResult string
+	TaskList []map[string]float64
+}

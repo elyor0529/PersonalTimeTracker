@@ -50,6 +50,54 @@ func TestMatchEmailPassword (t *testing.T) {
 	
 }
 
+func TestNewTask(t *testing.T) {
+	var name = "running"
+	var timespent = 0.5
+	var email = "abc@abc.com"
+	task := new(Task)
+	task.taskName = name
+	task.timeSpent = timespent
+	task.email = email
+	err := AddTask(task)
+	if err != nil {
+		log.Println("Add task error: " + err.Error())
+		t.Fail()
+	}
+}
+
+func TestGetTasks (t *testing.T) {
+
+	var name = "running"
+	var timespent = 0.5
+	var email = "abc@abc.com"
+	task := new(Task)
+	task.taskName = name
+	task.timeSpent = timespent
+	task.email = email
+	AddTask(task)
+
+	//var mapResult *map[string]float64
+	//var err error
+	mapResult, err := SelectTasksByEmail( "abc@abc.com" )
+	if err != nil {
+		log.Println("GetTasks error " + err.Error())
+		t.Fail()
+	}
+	if len(mapResult) <= 0 {
+		log.Printf("Zero tasks returned. Expected a number greater than 0")
+		t.Fail()
+	}
+	/*if val, ok := (*mapResult)["abc@abc.com"]; ok {
+		if val - 0.5 > 0.01 {
+			log.Printf("wrong time spent")
+			t.Fail()
+		}
+	} else {
+		log.Printf("There is no email field")
+		t.Fail()
+	}*/
+}
+
 func TestMain(m *testing.M) {
 	if database=="postgres" && 
     (databaseUserName == "" || 

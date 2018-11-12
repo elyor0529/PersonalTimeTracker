@@ -17,7 +17,10 @@ func main() {
 	http.HandleFunc("/newAuthorizedSession", reception.NewAuthorizedSessionHandler)
   http.HandleFunc("/Login", reception.LogUserIn)
   http.HandleFunc("/CreateAccount", reception.CreateAccountHandler)
-  
+  http.HandleFunc("/AddTask", reception.AddTaskHandler)
+	http.HandleFunc("/GetAllTasks", reception.GetAllTasksHandler)
+
+	
 	http.ListenAndServe(":8000", nil);
   
 }
