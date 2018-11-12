@@ -19,7 +19,6 @@ before_build:
 - createdb sandboxtest
 - createdb sandbox
 - ps: Invoke-WebRequest "https://dl.dropbox.com/s/s0d3a8y97aznbic/sandbox.sql" -OutFile sandbox.sql
-- createdb sandbox
 - psql -a -f sandbox.sql
 - cd %APPVEYOR_BUILD_FOLDER%\server && go test .\... && go build
 - cd %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker
