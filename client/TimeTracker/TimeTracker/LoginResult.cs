@@ -17,6 +17,8 @@ namespace timetracker
 
         [DataMember]
         public string LoginResult;
+        [DataMember]
+        public string SessionKey;
 
         public static LoginResultType ReadFromStream(System.IO.Stream stream) {
             return (LoginResultType)deserializerLoginResultType.ReadObject(stream);

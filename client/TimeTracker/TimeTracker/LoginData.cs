@@ -21,6 +21,9 @@ namespace timetracker
         public string Password { get; set; }
 
         [DataMember]
+        public int TimeZone { get; set; }
+
+        [DataMember]
         public string SessionKey { get; set; }
 
         private static DataContractJsonSerializer serializerLoginData =

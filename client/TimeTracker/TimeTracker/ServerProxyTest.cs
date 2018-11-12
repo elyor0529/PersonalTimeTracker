@@ -60,7 +60,7 @@ namespace timetracker
             {
                 FirstName = "Blah",
                 MiddleName = "Blah",
-                LatName ="Blah",
+                LastName ="Blah",
                 Email = "email",
                 Password = "password",
                 SessionKey = "zaaaaaa"

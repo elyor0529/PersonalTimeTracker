@@ -17,7 +17,7 @@ namespace timetracker
         [DataMember]
         public string CreateAccountResult;
         [DataMember]
-        public string SeassionKey;
+        public string SessionKey;
 
 
         public static CreateAccountResultType ReadFromStream(System.IO.Stream stream)

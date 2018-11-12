@@ -16,11 +16,13 @@ namespace timetracker
         [DataMember]
         public string MiddleName { get; set; }
         [DataMember]
-        public string LatName { get; set; }
+        public string LastName { get; set; }
         [DataMember]
         public string Email { get; set; }
         [DataMember]
         public string Password { get; set; }
+        [DataMember]
+        public int TimeZone { get; set;}
         [DataMember]
         public string SessionKey { get; set; }
         private static DataContractJsonSerializer serializerLoginData =

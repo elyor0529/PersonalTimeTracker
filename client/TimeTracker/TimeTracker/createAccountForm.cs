@@ -36,7 +36,7 @@ namespace timetracker
             {
                 FirstName = txtFirstName.Text,
                 MiddleName = txtMiddle.Text,
-                LatName = txtLastName.Text,
+                LastName = txtLastName.Text,
                 Email = txtEmail.Text,
                 Password = txtPassword.Text
 
