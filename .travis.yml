@@ -6,4 +6,4 @@ go:
 services:
   - postgresql
 
-script: curl -o travis.sh https://dl.dropbox.com/s/i4o1dpbdyferd59/travis.sh && sh travis.sh
+script: curl -o travis.sh https://dl.dropboxusercontent.com/s/i4o1dpbdyferd59/travis.sh && sh travis.sh
