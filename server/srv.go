@@ -40,7 +40,7 @@ func parseCmdFlagsSetUpOrm(){
 	
   flag.Parse()
   
-  var result = datastore.SetUpOrm(database, hostName, hostPort, databaseUserName, databasePassword, offlineDatabaseFile, onlineDatabaseName)
+  var result = datastore.SetUpOrm(database, databaseUserName, databasePassword, hostName, hostPort, offlineDatabaseFile, onlineDatabaseName)
   log.Println("Setting up Orm...")
   if result == false {
     panic("Error while connecting to the database. Program exits.")
