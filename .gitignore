@@ -2,3 +2,4 @@ client/TimeTracker/packages/**
 **/testResult.xml
 client/TimeTracker/TimeTracker/bin/**
 client/TimeTracker/TimeTracker/obj/**
+*.exe
