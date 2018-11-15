@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
-
 using System.Runtime.Serialization.Json;
 
-namespace timetracker
+namespace TimeTracker
 {
     [DataContract]
     public sealed class LoginData
@@ -29,7 +28,8 @@ namespace timetracker
         private static DataContractJsonSerializer serializerLoginData =
             new DataContractJsonSerializer(typeof(LoginData));
 
-        public System.IO.MemoryStream GetMemoryStream(){
+        public System.IO.MemoryStream GetMemoryStream()
+        {
             var loginSendingStream = new System.IO.MemoryStream();
             serializerLoginData.WriteObject(loginSendingStream, this);
             return loginSendingStream;

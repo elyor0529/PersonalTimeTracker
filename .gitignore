@@ -3,3 +3,4 @@ client/TimeTracker/packages/**
 client/TimeTracker/TimeTracker/bin/**
 client/TimeTracker/TimeTracker/obj/**
 *.exe
+server/runserver.bat

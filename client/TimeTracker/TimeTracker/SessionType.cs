@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
-namespace timetracker
+namespace TimeTracker
 {
-    [DataContract]
     public class SessionType
     {
         [DataMember]
@@ -16,7 +15,8 @@ namespace timetracker
         private static DataContractJsonSerializer deserializerSessionType =
             new DataContractJsonSerializer(typeof(SessionType));
 
-        public byte[] getSessionKey(){
+        public byte[] getSessionKey()
+        {
             return Convert.FromBase64String(Session);
         }
 
