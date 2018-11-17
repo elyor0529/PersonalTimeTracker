@@ -55,7 +55,7 @@ namespace TimeTracker
                 
                 { NavigationService.Navigate(new Home()); }
 
-
+                else { MessageBox.Show("Login fail! Please Provide correct user name and password"); }
             }
 
            
@@ -96,6 +96,11 @@ namespace TimeTracker
             else {
                 return true;
             }
+        }
+
+        private void ForgotPasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

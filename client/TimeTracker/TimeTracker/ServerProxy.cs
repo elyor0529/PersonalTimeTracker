@@ -63,5 +63,12 @@ namespace TimeTracker
             var content = await httpClient.PostAsync(serverURL + "/Login", httpContent);
             return LoginResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
         }
+        public async Task<CreateAccountResultType> CreateAccount(CreateAccountData data)
+        {
+            data.TimeZone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Today).Hours;
+            HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+            var content = await httpClient.PostAsync(serverURL + "/CreateAccount", httpContent);
+            return CreateAccountResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+        }
     }
 }

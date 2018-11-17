@@ -44,7 +44,7 @@
                 CreateAccount
             </Button>
 
-            <Button Name="ForgotPasswordBtn" Width="130">
+            <Button Name="ForgotPasswordBtn" Width="130" Click="ForgotPasswordBtn_Click">
                 Forgot password ?
             </Button>
         </StackPanel>

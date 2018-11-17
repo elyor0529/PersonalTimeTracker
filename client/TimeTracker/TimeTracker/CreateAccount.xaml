@@ -12,8 +12,9 @@
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="19*" />
+                    <ColumnDefinition Width="74*"/>
+                    <ColumnDefinition Width="204*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -21,40 +22,58 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                    <TextBlock  Background="Transparent">Full Name</TextBlock>
+
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
+                    <TextBlock  Background="Transparent">First Name</TextBlock>
                 </Border>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="0">
-                    <TextBox Name="FullName" Width="200" >
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
+                    <TextBox Name="FirstName" Width="200" >
                     </TextBox>
                 </Border>
 
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="1" Grid.Column="0">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
+                    <TextBlock  Background="Transparent">Middle Name</TextBlock>
+                </Border>
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
+                    <TextBox Name="MiddleName" Width="200" >
+                    </TextBox>
+                </Border>
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
+                <TextBlock  Background="Transparent">Last Name</TextBlock>
+                </Border>
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
+                    <TextBox Name="LastName" Width="200" >
+                    </TextBox>
+                </Border>
+
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
                     <TextBlock  Background="Transparent">Email</TextBlock>
                 </Border>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
                     <TextBox Name="Email" Width="200" >
                     </TextBox>
                 </Border>
 
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="2" Grid.Column="0">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
                     <TextBlock  Background="Transparent">Password</TextBlock>
                 </Border>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="2">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
                     <TextBox Name="Password" Width="200" >
                     </TextBox>
                 </Border>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="3" Grid.Column="0">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
                     <TextBlock  Background="Transparent">Retype Password</TextBlock>
                 </Border>
-                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="3">
+                <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
                     <TextBox Name="RetypePassword" Width="200" >
                     </TextBox>
                 </Border>
 
-                <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="4" Grid.Column="1">
-                    <Button HorizontalAlignment="Right" Width="70">Create</Button>
+                <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
+                    <Button Name="CreateBtn" HorizontalAlignment="Right"  Width="70" Click="CreateBtn_Click" Margin="0,0.2,-0.2,-0.2">Create</Button>
                 </Border>
             </Grid>
         </StackPanel>

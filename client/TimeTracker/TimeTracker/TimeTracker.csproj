@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateAccountData.cs" />
+    <Compile Include="CreateAccountResultType.cs" />
     <Compile Include="LoginData.cs" />
     <Compile Include="LoginResultType.cs" />
     <Compile Include="ServerProxy.cs" />

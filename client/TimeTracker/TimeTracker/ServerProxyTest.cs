@@ -15,7 +15,7 @@ namespace timetracker
         Process server;
         ServerProxy serverProxy;
 
-        [OneTimeSetUp]
+       /* [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
             Console.WriteLine("Server binary path: " + 
@@ -33,7 +33,7 @@ namespace timetracker
 
             serverProxy = new ServerProxy();
             Console.WriteLine("server PID : " + server.Id);
-        }
+        }*/
 
         [TestCase]
         public async Task TestGetUnauthorizedSession()
@@ -67,10 +67,10 @@ namespace timetracker
             });
             Assert.AreEqual("Success", createAccountResult.CreateAccountResult);
         }
-        [OneTimeTearDown]
+        /*[OneTimeTearDown]
         public void TearDown()
         {
             server.Kill();
-        }
+        }*/
     }
 }
