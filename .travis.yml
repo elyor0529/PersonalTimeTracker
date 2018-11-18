@@ -6,4 +6,4 @@ go:
 services:
   - postgresql
 
-script: curl -o travis.sh https://dl.dropboxusercontent.com/s/i4o1dpbdyferd59/travis.sh && sh travis.sh
+script: export PGPASSWORD="" && export PGUSER="postgres" && pip install --user future && python server_tests.py builddb && python server_tests.py buildserver && python server_tests.py testserver

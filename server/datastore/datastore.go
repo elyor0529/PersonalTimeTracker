@@ -12,9 +12,9 @@ type datastore struct{
 
 var globalOrm *datastore = nil
 func SetUpOrm(databaseVendor *string, 
-  userName *string, password *string, 
-  hostName *string, hostPort *string,
-  offlineDatabasePath *string, onlineDbName *string) bool {
+					userName *string, password *string, 
+					hostName *string, hostPort *string,
+					offlineDatabasePath *string, onlineDbName *string) bool {
 	if globalOrm != nil {
 		return true
 	}
@@ -29,15 +29,13 @@ func SetUpOrm(databaseVendor *string,
   } else if *databaseVendor == "postgres" {
     var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
     log.Println(connectionString)
-    //globalOrm.orm, err = gorm.Open(*databaseVendor, connectionString)
 		globalOrm.orm, err = sql.Open( "postgres", connectionString)
-
   }
   
   if err != nil {
     log.Println("error while connecting to the database: " + err.Error())
     return false
   }
-
+	
   return true
 }

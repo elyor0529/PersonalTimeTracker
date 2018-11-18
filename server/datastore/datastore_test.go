@@ -7,7 +7,11 @@ import (
   "testing"
 	"fmt"
 	"log"
+	"time"
 )
+
+var resetTableAccount = "DELETE from Account;"
+var resetTableTask = "DELETE from Task;"
 
 var database = os.Getenv("acs_database")
 var databaseUserName = os.Getenv("acs_dbuser")
@@ -39,8 +43,21 @@ func TestNewAccount(t *testing.T) {
 }
 
 func TestMatchEmailPassword (t *testing.T) {
+	var email = "cde@cde.com"
+	var timezone = 4
+	var pass = "abc"
+	var firstName = "Jeff"
+	var lastName = "Greenwood"
+	var middleName = "M."
+	newAccount := MakeAccount( &email, timezone, &pass, &firstName, &middleName, &lastName);
+	addResult := AddAccount(newAccount)
+	if addResult != nil {
+		log.Println("addResult failed. " + addResult.Error() )
+		t.Fail()
+	}
+	
 	var account Account
-	account.email = "abc@abc.com"
+	account.email = "cde@cde.com"
 	account.encryptedPasswordHash = "abc"
 	err := MatchEmailPassword(&account)
 	if  err != nil {
@@ -57,6 +74,7 @@ func TestNewTask(t *testing.T) {
 	task := new(Task)
 	task.taskName = name
 	task.timeSpent = timespent
+	task.taskDate = time.Now()
 	task.email = email
 	err := AddTask(task)
 	if err != nil {
@@ -73,6 +91,7 @@ func TestGetTasks (t *testing.T) {
 	task := new(Task)
 	task.taskName = name
 	task.timeSpent = timespent
+	task.taskDate = time.Now()
 	task.email = email
 	AddTask(task)
 
@@ -102,7 +121,6 @@ func TestMain(m *testing.M) {
 	log.SetFlags(log.Llongfile)
 	if database=="postgres" && 
     (databaseUserName == "" || 
-      databasePassword == ""  || 
       onlineDatabaseName == "" || 
       hostName == "" || 
       hostPort == "") {
@@ -117,10 +135,12 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
   }
 	result := SetUpOrm( &database, &databaseUserName, &databasePassword, &hostName, &hostPort, &offlineDatabaseFile, &onlineDatabaseNameTest)
-    if result == false {
-      fmt.Println("failed to connect to database.")
-			os.Exit(1)
-    }
+  if result == false {
+    fmt.Println("failed to connect to database.")
+		os.Exit(1)
+  }
+	
+	
 	defer globalOrm.orm.Close()
 	os.Exit(m.Run())
 }
