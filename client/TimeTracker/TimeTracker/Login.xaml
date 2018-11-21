@@ -32,8 +32,8 @@
                     <TextBlock  Background="Transparent">Password</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1">
-                    <TextBox Name="Password" Width="200" >
-                    </TextBox>
+                    <PasswordBox Name="Password" Width="200" PasswordChar="*">
+                    </PasswordBox>
                 </Border>
             </Grid>
             <Button Name="LoginBtn" Width="130" Click="LoginBtn_Click">

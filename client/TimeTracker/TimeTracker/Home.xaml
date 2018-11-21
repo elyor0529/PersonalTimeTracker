@@ -4,11 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TimeTracker"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Home">
+      mc:Ignorable="d"
+      Title="Home" Height="445.099" Width="604.178">
 
     <Grid VerticalAlignment="Center">
-        <Label> Home</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="101*"/>
+            <ColumnDefinition Width="299*"/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="100">
+            <Button Name="PreviousBtn"  HorizontalAlignment="Left" Height="39" Margin="114,-180,-165,0" VerticalAlignment="Top" Width="151" Click="PreviousBtn_Click" RenderTransformOrigin="0.511,0.826">
+                Add a previous task
+            </Button>
+        </Grid>
+        <Button Name="StartTrackBtn" HorizontalAlignment="Left" Margin="112,-130,0,0" VerticalAlignment="Top" Width="152" Height="39" Grid.ColumnSpan="2" RenderTransformOrigin="0.49,1.089">
+            Start tracking a task
+        </Button>
+        <TextBox HorizontalAlignment="Center" Height="141" Margin="41,-64,55,-59" TextWrapping="Wrap" Text="List of all tasks" VerticalAlignment="Top" Width="508" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>

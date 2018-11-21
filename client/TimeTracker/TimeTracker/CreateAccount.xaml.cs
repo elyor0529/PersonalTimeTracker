@@ -29,7 +29,7 @@ namespace TimeTracker
 
         private async  void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
-            bool correctInput = VerifyInput(FirstName.Text,MiddleName.Text,LastName.Text, Email.Text, Password.Text,RetypePassword.Text);
+            bool correctInput = VerifyInput(FirstName.Text,MiddleName.Text,LastName.Text, Email.Text, Password.Password,RetypePassword.Password);
             bool correctEmail = VerifyEmail(Email.Text);
             CreateAccountData createAccount = new CreateAccountData {
 
@@ -37,7 +37,7 @@ namespace TimeTracker
                 MiddleName = MiddleName.Text,
                 LastName = LastName.Text,
                 Email = Email.Text,
-                Password = Password.Text
+                Password = Password.Password
 
             };
             if (correctEmail == true && correctInput == true) {
@@ -85,7 +85,7 @@ namespace TimeTracker
         private bool VerifyInput(String firstname,String middlename, String lastname, String email, String password,String retypepassword)
         {
 
-            if (FirstName.Text == ""||MiddleName.Text == ""|| LastName.Text==""|| Email.Text == "" || Password.Text == "" || RetypePassword.Text == "")
+            if (FirstName.Text == ""||MiddleName.Text == ""|| LastName.Text==""|| Email.Text == "" || Password.Password == "" || RetypePassword.Password == "")
             {
 
                 MessageBox.Show("FullName,Email, password and Retype Password must be provided");
@@ -94,7 +94,7 @@ namespace TimeTracker
                 
             }
 
-            else if (RetypePassword.Text != Password.Text)
+            else if (RetypePassword.Password != Password.Password)
             {
 
                 MessageBox.Show("Password Doesn't match");

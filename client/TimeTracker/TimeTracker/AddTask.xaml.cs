@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TimeTracker
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for AddTask.xaml
     /// </summary>
-    public partial class Home : Page
+    public partial class AddTask : Page
     {
-        public Home()
+        public AddTask()
         {
             InitializeComponent();
         }
 
-        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            NavigationService.Navigate(new AddTask());
+
         }
     }
 }

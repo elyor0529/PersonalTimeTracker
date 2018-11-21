@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace TimeTracker
 {
     /// <summary>
@@ -22,9 +23,11 @@ namespace TimeTracker
     {
         private SessionType sessionObj;
         private LoginResultType resultObj;
+        
         public Login()
         {
             InitializeComponent();
+           
         }
 
         private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
@@ -36,12 +39,12 @@ namespace TimeTracker
         {
 
 
-            bool correctInput = VerifyInput(Email.Text, Password.Text);
+            bool correctInput = VerifyInput(Email.Text, Password.Password);
             bool correctEmail = VerifyEmail(Email.Text);
             LoginData log = new LoginData {
 
                 Email = Email.Text,
-                Password = Password.Text
+                Password = Password.Password
             };
             
            
@@ -83,10 +86,44 @@ namespace TimeTracker
 
             return true;
         }
+        private bool ValidatePassword(String password){
+
+             
+            
+            const int MIN_LENGTH = 8;
+            const int MAX_LENGTH = 8;
+            if (password == null) throw new ArgumentNullException();
+
+            bool meetsLengthRequirements = password.Length >= MIN_LENGTH && password.Length <= MAX_LENGTH;
+            bool hasUpperCaseLetter = false;
+            bool hasLowerCaseLetter = false;
+            bool hasDecimalDigit = false;
+
+            if (meetsLengthRequirements)
+            {
+                foreach (char c in password)
+                {
+                    if (char.IsUpper(c)) hasUpperCaseLetter = true;
+                    else if (char.IsLower(c)) hasLowerCaseLetter = true;
+                    else if (char.IsDigit(c)) hasDecimalDigit = true;
+                }
+            }
+
+            bool isValid = meetsLengthRequirements
+                        && hasUpperCaseLetter
+                        && hasLowerCaseLetter
+                        && hasDecimalDigit
+                        ;
+            return isValid;
+
+
+
+
+        }
         private bool VerifyInput(String email, String password)
         {
 
-            if (Email.Text == "" || Password.Text == "")
+            if (email == "" || password == "")
             {
 
                 MessageBox.Show("Email & password must be provided");

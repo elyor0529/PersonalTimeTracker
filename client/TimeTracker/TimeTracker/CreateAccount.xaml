@@ -30,7 +30,7 @@
                     <TextBlock  Background="Transparent">First Name</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="FirstName" Width="200" >
+                    <TextBox Name="FirstName" Width="200" Margin="29,-2,-29,2" >
                     </TextBox>
                 </Border>
 
@@ -38,14 +38,14 @@
                     <TextBlock  Background="Transparent">Middle Name</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="MiddleName" Width="200" >
+                    <TextBox Name="MiddleName" Width="200" Margin="29,-2,-29,2" >
                     </TextBox>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
                 <TextBlock  Background="Transparent">Last Name</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="LastName" Width="200" >
+                    <TextBox Name="LastName" Width="200" Margin="29,-2,-29,2" >
                     </TextBox>
                 </Border>
 
@@ -53,7 +53,7 @@
                     <TextBlock  Background="Transparent">Email</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="Email" Width="200" >
+                    <TextBox Name="Email" Width="200" Margin="29,-2,-29,2" >
                     </TextBox>
                 </Border>
 
@@ -61,15 +61,15 @@
                     <TextBlock  Background="Transparent">Password</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="Password" Width="200" >
-                    </TextBox>
+                    <PasswordBox Name="Password" Width="200" Margin="29,2,-29,-2" PasswordChar="*" MaxLength="8">
+                    </PasswordBox>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
                     <TextBlock  Background="Transparent">Retype Password</TextBlock>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
-                    <TextBox Name="RetypePassword" Width="200" >
-                    </TextBox>
+                    <PasswordBox Name="RetypePassword" Width="200" HorizontalAlignment="Left" Margin="29,2,-29,-2" PasswordChar="*" MaxLength="8">
+                    </PasswordBox>
                 </Border>
 
                 <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="73.571,0,0.2,0">
