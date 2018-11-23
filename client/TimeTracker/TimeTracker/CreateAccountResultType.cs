@@ -21,5 +21,9 @@ namespace TimeTracker
         {
             return (CreateAccountResultType)deserializerCreateAccountResultType.ReadObject(stream);
         }
+
+        public bool IsSuccess(){
+            return CreateAccountResult.Equals("Success");
+        }
     }
 }

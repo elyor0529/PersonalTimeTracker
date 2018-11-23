@@ -46,7 +46,7 @@ namespace TimeTracker
                 createAccount.SessionKey = sessionObj.Session;
 
                 createAccountObj = await ServerProxySingleton.serverProxy.CreateAccount(createAccount);
-                if (createAccountObj.CreateAccountResult.Equals("Success"))
+                if (createAccountObj.IsSuccess())
                 {
 
                     NavigationService.Navigate(new Home());

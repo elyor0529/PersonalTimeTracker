@@ -15,7 +15,7 @@ namespace TimeTracker
     {
         public static ServerProxy instance = null;
 
-        HttpClient httpClient = new HttpClient();
+        HttpClient httpClient;
 
         public string host = "127.0.0.1";
         public int port = 8000;
@@ -40,9 +40,8 @@ namespace TimeTracker
         {
             try
             {
-
-                Console.WriteLine("Connecting.....");
                 serverURL = "http://" + host + ":" + port;
+                httpClient = new HttpClient();
             }
             catch (SocketException SE)
             {
@@ -51,24 +50,73 @@ namespace TimeTracker
         }
         public async Task<SessionType> GetUnauthorizedSession()
         {
-            var content = await httpClient.GetAsync("http://" + host + ":" + port + "/newUnauthorizedSession");
-            System.IO.Stream stream = await content.Content.ReadAsStreamAsync();
-            return SessionType.ReadFromStream(stream);
+            try
+            {
+                var content = await httpClient.GetAsync(serverURL + "/newUnauthorizedSession");
+                System.IO.Stream stream = await content.Content.ReadAsStreamAsync();
+                return SessionType.ReadFromStream(stream);
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
         }
 
         public async Task<LoginResultType> LogIn(LoginData data)
         {
-            data.TimeZone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Today).Hours;
-            HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
-            var content = await httpClient.PostAsync(serverURL + "/Login", httpContent);
-            return LoginResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            try
+            {
+                data.TimeZone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Today).Hours;
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/Login", httpContent);
+                return LoginResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
         }
         public async Task<CreateAccountResultType> CreateAccount(CreateAccountData data)
         {
-            data.TimeZone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Today).Hours;
-            HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
-            var content = await httpClient.PostAsync(serverURL + "/CreateAccount", httpContent);
-            return CreateAccountResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            try
+            {
+                data.TimeZone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Today).Hours;
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/CreateAccount", httpContent);
+                return CreateAccountResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
+        }
+
+        public async Task<RetrieveTaskResultType> GetAllTasks(string SessionKey)
+        {
+            try
+            {
+                var content = await httpClient.GetAsync(serverURL + "/GetAllTasks");
+                System.IO.Stream stream = await content.Content.ReadAsStreamAsync();
+                return RetrieveTaskResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
+        }
+
+        public async Task<SendTaskResultType> SendTask(TaskData data)
+        {
+            try
+            {
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/AddTask", httpContent);
+                return SendTaskResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
         }
     }
 }

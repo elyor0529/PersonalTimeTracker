@@ -6,34 +6,19 @@ using System.IO;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 
-namespace timetracker
+namespace TimeTracker
 {
     class ServerProxyTest
     {
         const string serverIP = "127.0.0.1";
         const string serverPort = "8000";
-        Process server;
         ServerProxy serverProxy;
-
-       /* [OneTimeSetUp]
-        public void RunBeforeAnyTests()
-        {
-            Console.WriteLine("Server binary path: " + 
-            Directory.GetParent(
-            System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase)
-            .Parent.Parent.Parent.FullName,
-            "server.exe");
-
-            server = Process.Start(
-            Path.Combine(
-            Directory.GetParent(
-            System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase)
-            .Parent.Parent.Parent.FullName,
-            "server.exe"));
-
+        Random rand;
+        [OneTimeSetUp]
+        public void init() {
+            rand = new Random();
             serverProxy = new ServerProxy();
-            Console.WriteLine("server PID : " + server.Id);
-        }*/
+        }
 
         [TestCase]
         public async Task TestGetUnauthorizedSession()
@@ -45,32 +30,88 @@ namespace timetracker
         [TestCase]
         public async Task TestLogin()
         {
+            string email = rand.Next().ToString();
+            string password = rand.Next().ToString();
+            string suffix = rand.Next().ToString();
+
+            CreateAccountResultType createAccountResult = await serverProxy.CreateAccount(
+            makeRandomCreateAccountData(nameSuffix: suffix, email: email, password: password));
+            Assert.AreEqual(true, createAccountResult.IsSuccess());
+
             LoginResultType loginResultType = await serverProxy.LogIn(new LoginData()
             {
-                Email = "email",
-                Password = "password",
-                SessionKey = "zaaaaaa"
+                Email = email, Password = password, SessionKey = "zaaaaaa"
             });
-            Assert.AreEqual("Success", loginResultType.LoginResult);
+            Assert.AreEqual(true, loginResultType.IsSuccess());
         }
         [TestCase]
         public async Task CreateAccountForm()
         {
-            CreateAccountResultType createAccountResult = await serverProxy.CreateAc(new CreateAccount()
-            {
-                FirstName = "Blah",
-                MiddleName = "Blah",
-                LastName ="Blah",
-                Email = "email",
-                Password = "password",
-                SessionKey = "zaaaaaa"
-            });
-            Assert.AreEqual("Success", createAccountResult.CreateAccountResult);
+            string suffix = rand.Next().ToString();
+            string email = rand.Next().ToString();
+            string password = rand.Next().ToString();
+            CreateAccountResultType createAccountResult = await serverProxy.CreateAccount(
+            makeRandomCreateAccountData(nameSuffix: suffix, email: email, password: password));
+            Assert.AreEqual(true, createAccountResult.IsSuccess());
         }
-        /*[OneTimeTearDown]
-        public void TearDown()
+
+        [TestCase]
+        public async Task SendTask() {
+            string TaskName = rand.Next().ToString();
+            string suffix = rand.Next().ToString();
+            string email = rand.Next().ToString();
+            string password = rand.Next().ToString();
+            CreateAccountResultType createAccountResult = await serverProxy.CreateAccount(
+            makeRandomCreateAccountData(nameSuffix: suffix, email: email, password: password));
+            Assert.AreEqual(true, createAccountResult.IsSuccess());
+
+            SendTaskResultType result = await serverProxy.SendTask(
+                makeRandomTask(TaskName, createAccountResult.SessionKey));
+            Assert.AreEqual(true, result.IsSuccess());
+        }
+
+
+        [TestCase]
+        public async Task GetAllTasks()
         {
-            server.Kill();
-        }*/
+            string suffix = rand.Next().ToString();
+            string email = rand.Next().ToString();
+            string password = rand.Next().ToString();
+            CreateAccountResultType createAccountResult = await serverProxy.CreateAccount(
+            makeRandomCreateAccountData(nameSuffix: suffix, email: email, password: password));
+            Assert.AreEqual(true, createAccountResult.IsSuccess());
+
+            string TaskName = rand.Next().ToString();
+            SendTaskResultType result = await serverProxy.SendTask(
+                makeRandomTask(TaskName, createAccountResult.SessionKey));
+            Assert.AreEqual(true, result.IsSuccess());
+
+            
+            RetrieveTaskResultType retrieveTaskResultType = 
+                await serverProxy.GetAllTasks(createAccountResult.SessionKey);
+            Assert.AreEqual(true, retrieveTaskResultType.IsSuccess());
+            Assert.AreEqual(1, retrieveTaskResultType.RetrieveTaskListResult.Length);
+        }
+
+        private CreateAccountData makeRandomCreateAccountData(string nameSuffix, string email, string password) {
+            return new CreateAccountData()
+            {
+                FirstName = "TestFirstName" + nameSuffix,
+                MiddleName = "TestMiddleName" + nameSuffix,
+                LastName = "TestLastName" + nameSuffix,
+                Email = email,
+                Password = password,
+                SessionKey = "zaaaaaa"
+            };
+        }
+        private TaskData makeRandomTask(string taskName, string sessionKey){
+            return new TaskData()
+            {
+                TaskName = rand.Next().ToString(),
+                TimeSpent = (float)2.5,
+                TaskDateTime = DateTime.UtcNow,
+                SessionKey = sessionKey,
+            };
+        }
     }
 }

@@ -24,6 +24,10 @@ namespace TimeTracker
             {
                 return (LoginResultType)deserializerLoginResultType.ReadObject(stream);
             }
+
+            public bool IsSuccess(){
+                return LoginResult.Equals("Success");
+            }
         }
 
     

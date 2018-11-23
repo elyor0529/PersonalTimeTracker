@@ -53,7 +53,7 @@ namespace TimeTracker
                 log.SessionKey = sessionObj.Session;
 
                 resultObj = await ServerProxySingleton.serverProxy.LogIn(log);
-                if (resultObj.LoginResult.Equals("Success")) 
+                if (resultObj.IsSuccess()) 
 
                 
                 { NavigationService.Navigate(new Home()); }
