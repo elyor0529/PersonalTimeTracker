@@ -16,6 +16,7 @@ before_build:
 - python run.py builddb
 - python run.py buildserver
 - python run.py testserver
-- python run.py testclient
 build:
   verbosity: minimal
+after_build:
+- python run.py testclient
