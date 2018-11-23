@@ -66,7 +66,7 @@ def buildclient():
 
 def testclient():
 	if platform.system() == "Windows":
-		execute(["nunit3-console", "--where", "\"namespace==TimeTracker\"", os.path.join("bin","Debug","TimeTracker.exe")])
+		execute(["nunit3-console", "--where", "\"namespace==TimeTracker\"", os.path.join("client","TimeTracker","TimeTracker","bin","Debug","TimeTracker.exe")])
 
 def rebuildDatabase():
 	dbpass=""
