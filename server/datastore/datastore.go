@@ -30,12 +30,19 @@ func SetUpOrm(databaseVendor *string,
     var connectionString = "host=" + *hostName + " port=" + *hostPort + " user=" + *userName + " dbname=" + *onlineDbName + " password=" + *password + " sslmode=disable"
     log.Println(connectionString)
 		globalOrm.orm, err = sql.Open( "postgres", connectionString)
-  }
+  } else {
+		log.Println("Unsupported connection string. Database setup Failed.")
+		return false
+	}
   
   if err != nil {
     log.Println("error while connecting to the database: " + err.Error())
     return false
   }
 	
+	_, stmterr := globalOrm.orm.Query("Select 2+1;");
+	if (stmterr != nil) {
+		return false
+	}
   return true
 }
