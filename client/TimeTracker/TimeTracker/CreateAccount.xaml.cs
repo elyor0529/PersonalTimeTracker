@@ -49,7 +49,7 @@ namespace TimeTracker
                 if (createAccountObj.IsSuccess())
                 {
 
-                    NavigationService.Navigate(new Home());
+                    NavigationService.Navigate(new Home(createAccountObj.SessionKey));
                 }
 
                 else { MessageBox.Show("Registration fail"); }

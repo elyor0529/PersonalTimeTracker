@@ -56,7 +56,7 @@ namespace TimeTracker
                 if (resultObj.IsSuccess()) 
 
                 
-                { NavigationService.Navigate(new Home()); }
+                { NavigationService.Navigate(new Home(resultObj.SessionKey)); }
 
                 else { MessageBox.Show("Login fail! Please Provide correct user name and password"); }
             }
