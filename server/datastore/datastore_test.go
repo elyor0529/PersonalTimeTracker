@@ -7,7 +7,6 @@ import (
   "testing"
 	"fmt"
 	"log"
-	"time"
 )
 
 var resetTableAccount = "DELETE from Account;"
@@ -74,7 +73,7 @@ func TestNewTask(t *testing.T) {
 	task := new(Task)
 	task.taskName = name
 	task.timeSpent = timespent
-	task.taskDate = time.Now()
+	task.taskDate ="2000-01-01T06:00:00.00Z"
 	task.email = email
 	err := AddTask(task)
 	if err != nil {
@@ -91,7 +90,7 @@ func TestGetTasks (t *testing.T) {
 	task := new(Task)
 	task.taskName = name
 	task.timeSpent = timespent
-	task.taskDate = time.Now()
+	task.taskDate = "2010-10-10T06:00:00.00Z"
 	task.email = email
 	AddTask(task)
 

@@ -1,6 +1,5 @@
 package businesslogic
 import (
-	"time"
 	"acs560_course_project/server/datastore"
 
 )
@@ -34,7 +33,7 @@ type CreateAccountRequestResult struct {
 type AddTaskRequestData struct {
 	TaskName string
 	TimeSpent float64
-	TaskDate time.Time
+	TaskDate string
 	SessionKey string
 }
 
