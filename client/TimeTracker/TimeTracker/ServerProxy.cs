@@ -91,12 +91,12 @@ namespace TimeTracker
             }
         }
 
-        public async Task<RetrieveTaskResultType> GetAllTasks(string SessionKey)
+        public async Task<RetrieveTaskResultType> GetAllTasks(RetrieveTaskListData data)
         {
             try
             {
-                var content = await httpClient.GetAsync(serverURL + "/GetAllTasks");
-                System.IO.Stream stream = await content.Content.ReadAsStreamAsync();
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/GetAllTasks", httpContent);
                 return RetrieveTaskResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
             }
             catch (HttpRequestException)
