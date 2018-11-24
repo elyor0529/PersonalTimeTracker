@@ -14,6 +14,6 @@ create table Task(
   taskId UUID Unique Primary key,
   taskName varchar(20),
   timeSpent real,
-	taskDate time,
+	taskDate timestamp,
   email varchar(30) REFERENCES Account(email)
 );
