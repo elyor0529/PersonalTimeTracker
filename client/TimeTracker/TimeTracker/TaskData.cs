@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Xml;
+using System.IO;
+
 namespace TimeTracker
 {
     [DataContract]
@@ -32,7 +34,8 @@ namespace TimeTracker
         {
             if (TaskDate == null)
             {
-                TaskDate = XmlConvert.ToString(TaskDateTime, XmlDateTimeSerializationMode.Utc);
+                DateTime temp = TaskDateTime.ToUniversalTime();
+                TaskDate = XmlConvert.ToString(temp, XmlDateTimeSerializationMode.Utc);
             }
             var taskSendingStream = new System.IO.MemoryStream();
             serializerTaskData.WriteObject(taskSendingStream, this);

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Xml;
+using System.Globalization;
+using System.IO;
 
 namespace TimeTracker
 {
@@ -24,7 +26,7 @@ namespace TimeTracker
             RetrieveTaskResultType result = (RetrieveTaskResultType)deserializerRetrieveTaskResultType.ReadObject(stream);
             DownloadedTaskType task = null ;
             for (int i = 0; i < result.TaskList.Length; i++) {
-                task.parseDate();
+                result.TaskList[i].parseDate();
             }
             return result;
         }
@@ -38,14 +40,15 @@ namespace TimeTracker
         [DataMember]
         public string TaskName;
         [DataMember]
-        public float TimeSpent;
+        public double TimeSpent;
         [DataMember]
         public string TaskDate;
 
         private DateTime TaskDateTime;
 
         public void parseDate(){
-            TaskDateTime = XmlConvert.ToDateTime(TaskDate, XmlDateTimeSerializationMode.Utc);
+            //TaskDateTime = XmlConvert.ToDateTime(TaskDate, XmlDateTimeSerializationMode.Local);
+            TaskDateTime = DateTime.ParseExact(TaskDate, "yyyy-MM-dd'T'HH:mm:ss.FFFFFFF'Z'", CultureInfo.GetCultureInfo("en-US").DateTimeFormat);
         }
 
         public DateTime getDateTime(){
