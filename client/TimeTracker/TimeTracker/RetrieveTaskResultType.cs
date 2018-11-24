@@ -54,5 +54,9 @@ namespace TimeTracker
         public DateTime getDateTime(){
             return TaskDateTime;
         }
+
+        public override string ToString(){
+            return TaskName;
+        }
     }
 }
