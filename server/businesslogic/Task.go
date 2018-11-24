@@ -5,7 +5,7 @@ import (
 )
 
 func AddTask( request *AddTaskRequestData, sessionEmail string) AddTaskRequestResult{
-	task := datastore.MakeTask( &(request.TaskName), &(request.TimeSpent), &sessionEmail)
+	task := datastore.MakeTask( &(request.TaskName), &(request.TimeSpent), &sessionEmail, &(request.TaskDate))
 	err := datastore.AddTask(task)
 	if err != nil {
 		return AddTaskRequestResult{

@@ -1,14 +1,14 @@
 package datastore
 import (
 	"log"
-	"errors"
+//	"errors"
 	"time"
 )
 type Task struct {
   taskId []byte
   taskName string
   timeSpent float64
-	taskDate time.Time
+	taskDate string
 	email string
 }
 
@@ -22,16 +22,22 @@ var insertTaskString = "INSERT INTO Task (taskId, taskName, timeSpent, taskDate,
 var selectTasksByEmailString = "Select taskname, timespent, taskDate from Task where email = $1"
 var selectCountTasksByEmail = "Select Count(*) as count from Task where email = $1"
 
-func MakeTask( name *string, duration *float64, email *string)  *Task {
+func MakeTask( name *string, duration *float64, email *string, taskDateInput *string)  *Task {
 	task := new(Task)
 	task.taskName = *name
 	task.timeSpent = *duration
 	task.email = *email
+	task.taskDate = *taskDateInput
 	return task
 }
 
 func AddTask( task *Task) error {
-	_, stmterr := globalOrm.orm.Exec(insertTaskString, task.taskName, task.timeSpent, task.taskDate, task.email);
+	convertedTaskDate, err := time.Parse(time.RFC3339, task.taskDate)
+	if err != nil {
+		log.Println("DateTime conversion error: " + err.Error())
+		return err
+	}
+	_, stmterr := globalOrm.orm.Exec(insertTaskString, task.taskName, task.timeSpent, convertedTaskDate, task.email);
 	if stmterr != nil {
 		log.Println("statement error : " + stmterr.Error())
 	}
@@ -39,25 +45,32 @@ func AddTask( task *Task) error {
 }
 
 func SelectTasksByEmail( email string ) ([](TaskFromDb), error) {
+	//log.Printf("email is %s\n", email)
 	countRows, counterr := globalOrm.orm.Query(selectCountTasksByEmail, email)
 	if (counterr != nil) {
 		log.Println("statement error : " + counterr.Error())
 		return nil, counterr
 	}
-	if countRows.Next() {
+	var rowsCount int
+	//var rowsCountStr string
+	for countRows.Next() {
+		countRows.Scan(&rowsCount)
+	}
+	//log.Printf("rowsCount %d", rowsCount)
+	/*if countRows.Next() {
 		
 	} else {
 		log.Println("Zero rows.")
 		return nil, errors.New("No rows")
-	}
-	var rowsCount int
+	}*/
 	countRows.Scan(&rowsCount)
-	
+	//log.Printf("rowsCount %d", rowsCount)
 	rows, stmterr := globalOrm.orm.Query(selectTasksByEmailString, email)
 	if stmterr != nil {
 		log.Println("statement error : " + stmterr.Error())
 			return nil, stmterr
 	} else {
+			//log.Printf("rowsCount for GetAllTasks is %d\n", rowsCount)
 			taskMap := make( [](TaskFromDb), rowsCount)
 			taskMapCounter := 0
 			var taskName string
