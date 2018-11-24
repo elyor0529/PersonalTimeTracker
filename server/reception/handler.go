@@ -90,8 +90,9 @@ func AddTaskHandler( writer http.ResponseWriter, requestPtr *http.Request ) {
 		result = businesslogic.AddTaskRequestResult {
 			AddResult: "Incompatible JSON request structure.",
 		}
-  }
-	result = businesslogic.AddTask(&request, getEmailBySession(request.SessionKey))
+  } else {
+		result = businesslogic.AddTask(&request, getEmailBySession(request.SessionKey))
+	}
 	jsonByteArr, error := json.Marshal( result )
 	writer.Write ( jsonByteArr )
 }
