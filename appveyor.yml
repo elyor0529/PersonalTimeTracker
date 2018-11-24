@@ -9,6 +9,7 @@ cache:
 - client\TimeTracker\packages -> **\packages.config
 install:
 - pip install future
+- nuget restore %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\TimeTracker\packages.config -OutputDirectory %APPVEYOR_BUILD_FOLDER%\client\TimeTracker\packages
 before_build:
 - set PGUSER=postgres
 - set PGPASSWORD=Password12!
