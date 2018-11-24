@@ -9,6 +9,7 @@ import os
 import sys
 import subprocess
 import platform
+import time
 
 globalMainDatabaseName="sandbox"
 globalTestDatabaseName="sandboxtest"
@@ -66,7 +67,13 @@ def buildclient():
 
 def testclient():
 	if platform.system() == "Windows":
-		execute(["nunit3-console", "--where", "\"namespace==TimeTracker\"", os.path.join("client","TimeTracker","TimeTracker","bin","Debug","TimeTracker.exe")])
+		p = subprocess.Popen( [os.path.join("server","server"), "-database", "postgres", "-dbname", "sandbox", "-dbuser", os.environ["PGUSER"], "-dbpassword", os.environ["PGPASSWORD"], "-ipaddr", "127.0.0.1", "-port", "5432"])
+		time.sleep(2)
+		if p.returncode is None:
+			execute(["nunit3-console", "--where", "namespace==TimeTracker", os.path.join("client","TimeTracker","TimeTracker","bin","Debug","TimeTracker.exe")])
+		else:
+			print("error")
+		p.kill()
 
 def rebuildDatabase():
 	dbpass=""
@@ -94,6 +101,8 @@ def main():
 		testserver()
 	elif sys.argv[1] == "buildclient":
 		buildclient()
+	elif sys.argv[1] == "testclient":
+		testclient()
 
 if __name__ == "__main__":
     main()
