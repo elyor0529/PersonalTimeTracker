@@ -9,10 +9,10 @@ using System.Runtime.Serialization.Json;
 namespace TimeTracker
 {
     [DataContract]
-    class RetrieveTaskListData
+    public class RetrieveTaskListData
     {
         [DataMember]
-        string SessionKey;
+        public string SessionKey;
 
         private static DataContractJsonSerializer serializerTaskData =
             new DataContractJsonSerializer(typeof(RetrieveTaskListData));
