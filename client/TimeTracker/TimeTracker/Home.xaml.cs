@@ -31,9 +31,17 @@ namespace TimeTracker
             TopRecentTaskContainer.DataContext = chartModel;
         }
 
-        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        private void AddPreviousTaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddTask());
+            AddPreviousTaskDialog dlg = new AddPreviousTaskDialog();
+
+            // Configure the dialog box
+            //dlg.Owner = this;
+           // dlg.DocumentMargin = this.documentTextBox.Margin;
+
+            // Open the dialog box modally 
+            dlg.ShowDialog();
+
         }
 
         private async void Top5RecentTasksListView_Initialized(object sender, EventArgs e)

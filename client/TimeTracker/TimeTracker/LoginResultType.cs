@@ -12,15 +12,16 @@ namespace TimeTracker
     public sealed class LoginResultType
     {
 
-            private static DataContractJsonSerializer deserializerLoginResultType =
-                new DataContractJsonSerializer(typeof(LoginResultType));
-
+            
             [DataMember]
             public string LoginResult;
             [DataMember]
             public string SessionKey;
+        private static DataContractJsonSerializer deserializerLoginResultType =
+                new DataContractJsonSerializer(typeof(LoginResultType));
 
-            public static LoginResultType ReadFromStream(System.IO.Stream stream)
+
+        public static LoginResultType ReadFromStream(System.IO.Stream stream)
             {
                 return (LoginResultType)deserializerLoginResultType.ReadObject(stream);
             }

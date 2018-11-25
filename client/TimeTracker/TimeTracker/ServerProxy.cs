@@ -118,5 +118,19 @@ namespace TimeTracker
                 throw new Exception("An unhandled exception in ServerProxy occurred.");
             }
         }
+        public async Task<AddRequestResult> AddTsk(AddTaskRequest data)
+        {
+            try
+            {
+
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/AddTask", httpContent);
+                return AddRequestResult.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
+        }
     }
 }
