@@ -30,13 +30,13 @@ namespace TimeTracker
 
         [DataMember]
         public string SessionKey { get; set; }
-        private static DataContractJsonSerializer serializerLoginData =
+        private static DataContractJsonSerializer serializerCreateAccountData =
            new DataContractJsonSerializer(typeof(CreateAccountData));
         public System.IO.MemoryStream GetMemoryStream()
         {
-            var loginSendingStream = new System.IO.MemoryStream();
-            serializerLoginData.WriteObject(loginSendingStream, this);
-            return loginSendingStream;
+            var createAccountSendingStream = new System.IO.MemoryStream();
+            serializerCreateAccountData.WriteObject(createAccountSendingStream, this);
+            return createAccountSendingStream;
         }
 
     }

@@ -26,7 +26,7 @@
                             </Button>
                         </Border>
                         <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30">
+                            <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30" Click="AddPreviousTaskBtn_Click">
                                 Add a previous task
                             </Button>
                         </Border>
