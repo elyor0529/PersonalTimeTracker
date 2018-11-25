@@ -1,39 +1,40 @@
 package businesslogic
+
 import (
 	"acs560_course_project/server/datastore"
-
 )
+
 type LoginRequestData struct {
-  Email string
-	Password string
-	TimeZone int
-  SessionKey string
+	Email      string
+	Password   string
+	TimeZone   int
+	SessionKey string
 }
 
-type LoginRequestResult struct{
-  LoginResult string
-  SessionKey string
+type LoginRequestResult struct {
+	LoginResult string
+	SessionKey  string
 }
 
 type CreateAccountRequestData struct {
-  FirstName string
-  MiddleName string
-  LastName string
-  Email string
-  Password string
-	TimeZone int
-  SessionKey string
+	FirstName  string
+	MiddleName string
+	LastName   string
+	Email      string
+	Password   string
+	TimeZone   int
+	SessionKey string
 }
 
 type CreateAccountRequestResult struct {
-  CreateAccountResult string
-  SessionKey string
+	CreateAccountResult string
+	SessionKey          string
 }
 
 type AddTaskRequestData struct {
-	TaskName string
-	TimeSpent float64
-	TaskDate string
+	TaskName   string
+	TimeSpent  float64
+	TaskDate   string
 	SessionKey string
 }
 
@@ -47,5 +48,5 @@ type RetrieveTaskListRequestData struct {
 
 type RetrieveTaskListRequestResult struct {
 	RetrieveTaskListResult string
-	TaskList []datastore.TaskFromDb
+	TaskList               []datastore.TaskFromDb
 }
