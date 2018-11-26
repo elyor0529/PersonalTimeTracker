@@ -71,9 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPreviousTaskDialog.xaml.cs">
+      <DependentUpon>AddPreviousTaskDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRequestResult.cs" />
     <Compile Include="AddTask.xaml.cs">
       <DependentUpon>AddTask.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddTaskRequest.cs" />
     <Compile Include="CreateAccountData.cs" />
     <Compile Include="CreateAccountResultType.cs" />
     <Compile Include="RetrieveTaskListData.cs" />
@@ -87,6 +92,10 @@
     <Compile Include="SessionType.cs" />
     <Compile Include="TaskData.cs" />
     <Compile Include="TopRecentTaskPieSeriesModel.cs" />
+    <Page Include="AddPreviousTaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
