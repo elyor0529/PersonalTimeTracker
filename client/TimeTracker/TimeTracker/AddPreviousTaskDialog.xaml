@@ -7,9 +7,13 @@
         mc:Ignorable="d"
         Title="AddPreviousTaskDialog" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="259,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=Box}">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="259,98,0,0" TextWrapping="Wrap" Name="TaskName" VerticalAlignment="Top" Width="120"/>
+        </StackPanel>
         <Label Content="Task" HorizontalAlignment="Left" Margin="188,98,0,0" VerticalAlignment="Top" Height="23" Width="66"/>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="275,138,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="284,166,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="0.507,1.69"/>
+        <Label Content="Time" HorizontalAlignment="Left" Margin="188,126,0,0" VerticalAlignment="Top"/>
+       <TextBox HorizontalAlignment="Left" Height="23" Margin="259,128,0,0" TextWrapping="Wrap" Name="TaskTime" VerticalAlignment="Top" Width="120"/>
+        
     </Grid>
 </Window>

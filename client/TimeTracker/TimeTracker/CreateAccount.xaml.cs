@@ -20,7 +20,7 @@ namespace TimeTracker
     /// </summary>
     public partial class CreateAccount : Page
     {
-        private SessionType sessionObj;
+        public SessionType sessionObj;
         private CreateAccountResultType createAccountObj;
         public CreateAccount()
         {

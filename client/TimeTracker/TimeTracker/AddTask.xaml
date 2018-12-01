@@ -1,4 +1,4 @@
-﻿<Page x:Class="TimeTracker.AddTask"
+﻿<Window x:Class="TimeTracker.AddTask"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="AddTask" Height="450" Width="800">
     <Grid HorizontalAlignment="Left" Height="261" VerticalAlignment="Top" Width="494" RenderTransformOrigin="2.377,1.674" Margin="147,55,0,0">
-        <Button Content="Task Name" HorizontalAlignment="Left" Margin="46,49,0,0" VerticalAlignment="Top" Width="110" Height="24" RenderTransformOrigin="0.746,0.68"/>
-        <Button Content="Add" Margin="224,128,181,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.485,1.648"/>
-        <Button Content="Duration" HorizontalAlignment="Left" Margin="46,78,0,0" VerticalAlignment="Top" Width="110" Height="25" RenderTransformOrigin="0.255,-0.112"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="184,49,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.128,-2.755"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="184,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173"/>
+        <Label Content="Task Name" HorizontalAlignment="Left" Margin="46,49,0,0" VerticalAlignment="Top" Width="110" Height="24" RenderTransformOrigin="0.746,0.68"/>
+        <Button Content="btnAdd" Margin="224,128,181,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.485,1.648" Click="Button_Click"/>
+        <Label Content="Duration" HorizontalAlignment="Left" Margin="46,78,0,0" VerticalAlignment="Top" Width="110" Height="25" RenderTransformOrigin="0.255,-0.112"/>
+        <TextBox Name="TaskName" HorizontalAlignment="Left" Height="24" Margin="184,49,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.128,-2.755"/>
+        <TextBox Name="TaskTime" HorizontalAlignment="Left" Height="25" Margin="184,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173"/>
     </Grid>
 
-</Page>
+</Window>

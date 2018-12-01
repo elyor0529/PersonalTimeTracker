@@ -6,10 +6,10 @@
       xmlns:oxy="http://oxyplot.org/wpf"
       xmlns:local="clr-namespace:TimeTracker"
       mc:Ignorable="d"
-      Title="Home" Height="445.099" Width="604.178">
+      Title="Home" Height="445.099" Width="700.178">
 
     <Grid>
-        <TabControl TabStripPlacement="Left">
+        <TabControl Name="myTabControl" TabStripPlacement="Left" Margin="-10,10,10,-9.8" SelectionChanged="myTabControl_SelectionChanged">
             <TabItem Header="General">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -21,15 +21,25 @@
                     </Grid.RowDefinitions>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                         <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="StartTrackingTaskBtn" Grid.Column="0" Grid.Row="0" Height="30">
+                            <Button Name="StartTrackingTaskBtn" Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Width="119" Click="StartTrackingTaskBtn_Click">
                                 Start tracking a task
                             </Button>
                         </Border>
                         <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30" Click="AddPreviousTaskBtn_Click">
+                            <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30" Click="AddPreviousTaskBtn_Click" Margin="0,-4.8,0,14.8" Width="113">
                                 Add a previous task
                             </Button>
                         </Border>
+                        <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+                            <Button Name="StartTimerBtn"  Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Click="StartTimerBtn_Click">
+                                Start Timer
+                            </Button>
+                        </Border>
+                        
+                        <Border>
+                            <Label Name="lblTimer"  Content="This is a Label control."/>
+                        </Border>
+                        
                     </StackPanel>
 
                        <!-- <StackPanel Orientation="Horizontal" Name="TopRecentTaskContainer" Grid.Row="1" Grid.Column="0">
@@ -61,6 +71,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            <Button Content="Button" Height="100" Width="75"/>
         </TabControl>
 
     </Grid>
