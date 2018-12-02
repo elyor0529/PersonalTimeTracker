@@ -36,15 +36,22 @@ namespace TimeTracker
         }
     }
     [DataContract]
-    public sealed class DownloadedTaskType {
+    public class DownloadedTaskType {
         [DataMember]
-        public string TaskName;
+        public string TaskName{ get; set; }
         [DataMember]
-        public double TimeSpent;
+        public double TimeSpent { get; set; }
         [DataMember]
-        public string TaskDate;
+        public string TaskDate{ get; set; }
 
+        
         private DateTime TaskDateTime;
+
+        public DateTime TaskDateTimeProperty {
+            get{
+                return TaskDateTime;
+            }
+        }
 
         public void parseDate(){
             //TaskDateTime = XmlConvert.ToDateTime(TaskDate, XmlDateTimeSerializationMode.Local);
