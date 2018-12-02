@@ -132,5 +132,47 @@ namespace TimeTracker
                 throw new Exception("An unhandled exception in ServerProxy occurred.");
             }
         }
+
+        public async Task<RecoverPasswordResultType> UpdatePassword(RecoverPasswordData data)
+        {
+            try
+            {
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/RecoverPassword", httpContent);
+                return RecoverPasswordResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
+        }
+
+        public async Task<AddSharedTaskResultType> AddSharedTask(AddSharedTaskData data)
+        {
+            try
+            {
+
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/ShareTaskWith", httpContent);
+                return AddSharedTaskResultType.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
+        }
+
+        public async Task<GetTasksSharedWithMeResult> GetTasksSharedWithMe(GetTasksSharedWithMeData data){
+            try
+            {
+                HttpContent httpContent = new ByteArrayContent(data.GetMemoryStream().ToArray());
+                var content = await httpClient.PostAsync(serverURL + "/GetAllTasksSharedWithMe", httpContent);
+                return GetTasksSharedWithMeResult.ReadFromStream(await content.Content.ReadAsStreamAsync());
+            }
+            catch (HttpRequestException)
+            {
+                throw new Exception("An unhandled exception in ServerProxy occurred.");
+            }
+        }
     }
 }
