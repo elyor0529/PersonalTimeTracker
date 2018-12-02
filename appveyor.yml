@@ -19,5 +19,3 @@ before_build:
 - python run.py testserver
 build:
   verbosity: minimal
-after_build:
-- python run.py testclient
