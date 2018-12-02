@@ -74,13 +74,22 @@
     <Compile Include="AddPreviousTaskDialog.xaml.cs">
       <DependentUpon>AddPreviousTaskDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddRequestResult.cs" />
+    <Compile Include="AddRequestResultType.cs" />
+    <Compile Include="AddSharedTaskData.cs" />
+    <Compile Include="AddSharedTaskResultType.cs" />
     <Compile Include="AddTask.xaml.cs">
       <DependentUpon>AddTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddTaskRequest.cs" />
     <Compile Include="CreateAccountData.cs" />
     <Compile Include="CreateAccountResultType.cs" />
+    <Compile Include="GetTasksSharedWithMeData.cs" />
+    <Compile Include="GetTasksSharedWithMeResult.cs" />
+    <Compile Include="RecoverPassword.xaml.cs">
+      <DependentUpon>RecoverPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecoverPasswordData.cs" />
+    <Compile Include="RecoverPasswordResultType.cs" />
     <Compile Include="RetrieveTaskListData.cs" />
     <Compile Include="RetrieveTaskResultType.cs" />
     <Compile Include="LoginData.cs" />
@@ -90,6 +99,9 @@
     <Compile Include="ServerProxySingleton.cs" />
     <Compile Include="ServerProxyTest.cs" />
     <Compile Include="SessionType.cs" />
+    <Compile Include="ShareDialog.xaml.cs">
+      <DependentUpon>ShareDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TaskData.cs" />
     <Compile Include="TopRecentTaskPieSeriesModel.cs" />
     <Page Include="AddPreviousTaskDialog.xaml">
@@ -133,6 +145,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RecoverPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShareDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
