@@ -24,7 +24,7 @@
                 </Border>
                 <Border BorderThickness="2" BorderBrush="Transparent" Grid.Column="1" Grid.Row="0">
                     <TextBox Name="Email" Width="200" >
-                        guest@abc.com
+                        
                     </TextBox>
                 </Border>
 

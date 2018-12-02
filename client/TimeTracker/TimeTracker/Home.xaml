@@ -37,7 +37,7 @@
                         </Border>
                         
                         <Border>
-                            <Label Name="lblTimer"  Content="This is a Label control."/>
+                            <Label Name="lblTimer"  Content=""/>
                         </Border>
                         
                     </StackPanel>

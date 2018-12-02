@@ -37,8 +37,7 @@ namespace TimeTracker
         {
            
             bool correctTaskInput = VerifyInput();
-            //  bool isText = IsTextAllowed(TaskName.Text);
-            float time;// = GetTime(TaskTime.Text);
+            float time;
             bool success = float.TryParse(TaskTime.Text, out time);
             bool isDigit = IsDigitAllowed(TaskTime.Text);
             bool isText = IsTextAllowed(PickDate.Text);
@@ -48,7 +47,7 @@ namespace TimeTracker
                 dateTime = DateTime.Parse(dt);
             }
 
-            //else { MessageBox.Show("Invalid date");}
+           
             TaskData task = new TaskData
             {
 

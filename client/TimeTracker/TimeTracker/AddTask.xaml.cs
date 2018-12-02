@@ -22,11 +22,9 @@ namespace TimeTracker
     /// </summary>
     public partial class AddTask : Window
     {
-        private SessionType sessionObj;
+        
         private SendTaskResultType sendTaskDataObj;
         private string sessionKey;
-        DispatcherTimer timer = new DispatcherTimer();
-        private DateTime dt;
         
         private float taskTime;
 
@@ -35,8 +33,6 @@ namespace TimeTracker
             InitializeComponent();
 
             sessionKey = sessionKeyIn;
-            
-
         }
 
         public AddTask(string sessionKeyIn, float taskTimeIn) : this(sessionKeyIn)
@@ -52,12 +48,7 @@ namespace TimeTracker
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             bool correctTaskInput = VerifyInput();
-            //  bool isText = IsTextAllowed(TaskName.Text);
-            float time;// = GetTime(TaskTime.Text);
             
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.IsEnabled = true;
-            timer.Start();
             DateTime dt = DateTime.Now;
             TaskData task = new TaskData
             {
@@ -107,15 +98,7 @@ namespace TimeTracker
 
             }
            
-           if (IsTextAllowed(TaskName.Text) == false && IsTextAllowed(TaskName.Text) == true)
-            {
-
-                MessageBox.Show("Please Enter Text value");
-                TaskName.Clear();
-                return false;
-            }
-
-          else
+           else
             {
                 return true;
             }
