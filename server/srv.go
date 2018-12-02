@@ -19,7 +19,9 @@ func main() {
 	http.HandleFunc("/CreateAccount", reception.CreateAccountHandler)
 	http.HandleFunc("/AddTask", reception.AddTaskHandler)
 	http.HandleFunc("/GetAllTasks", reception.GetAllTasksHandler)
-
+	http.HandleFunc("/RecoverPassword", reception.RecoverPasswordHandler)
+	http.HandleFunc("/ShareTaskWith", reception.ShareTaskWithHandler)
+	http.HandleFunc("/GetAllTasksSharedWithMe", reception.GetAllTasksSharedWithMeHandler)
 	http.ListenAndServe(":8000", nil)
 
 }
