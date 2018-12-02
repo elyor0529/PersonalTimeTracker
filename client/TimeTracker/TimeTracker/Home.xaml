@@ -5,74 +5,149 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:oxy="http://oxyplot.org/wpf"
       xmlns:local="clr-namespace:TimeTracker"
-      mc:Ignorable="d"
-      Title="Home" Height="445.099" Width="700.178">
+      Title="Home" Height="800" Width="700.178" Name="MyHome">
 
     <Grid>
-        <TabControl Name="myTabControl" TabStripPlacement="Left" Margin="-10,10,10,-9.8" SelectionChanged="myTabControl_SelectionChanged">
-            <TabItem Header="General">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                        <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="StartTrackingTaskBtn" Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Width="119" Click="StartTrackingTaskBtn_Click">
-                                Start tracking a task
-                            </Button>
-                        </Border>
-                        <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30" Click="AddPreviousTaskBtn_Click" Margin="0,-4.8,0,14.8" Width="113">
-                                Add a previous task
-                            </Button>
-                        </Border>
-                        <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-                            <Button Name="StartTimerBtn"  Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Click="StartTimerBtn_Click">
-                                Start Timer
-                            </Button>
-                        </Border>
-                        
-                        <Border>
-                            <Label Name="lblTimer"  Content=""/>
-                        </Border>
-                        
-                    </StackPanel>
 
-                       <!-- <StackPanel Orientation="Horizontal" Name="TopRecentTaskContainer" Grid.Row="1" Grid.Column="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+                    <Button Name="StartTrackingTaskBtn" Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Width="119" Click="StartTrackingTaskBtn_Click">
+                        Start tracking a task
+                    </Button>
+                </Border>
+                <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+                    <Button Name="AddPreviousTaskBtn" Grid.Column="1" Grid.Row="0" Height="30" Click="AddPreviousTaskBtn_Click" Margin="0,-4.8,0,14.8" Width="113">
+                        Add a previous task
+                    </Button>
+                </Border>
+                <Border BorderThickness="5" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+                    <Button Name="StartTimerBtn"  Grid.Column="0" Grid.Row="0" Height="30" RenderTransformOrigin="0.076,0.62" Margin="0,-4.8,0,14.8" Click="StartTimerBtn_Click">
+                        Start Timer
+                    </Button>
+                </Border>
+                <Border>
+                    <Label Name="lblTimer"  Content=""/>
+                </Border>
+            </StackPanel>
+
+            <!-- <StackPanel Orientation="Horizontal" Name="TopRecentTaskContainer" Grid.Row="1" Grid.Column="0">
                         -->
-                    <Grid Name="TopRecentTaskContainer" 
+            <Grid Name="TopRecentTaskContainer" 
                         Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                </Grid.RowDefinitions>
+                <Grid 
+                        Grid.Column="0" Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                        <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="300"/>
-                            </Grid.RowDefinitions>
-                            <ListView HorizontalAlignment="Left" 
-                            
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Name="Top5RecentTasksListView"
-                            Initialized="Top5RecentTasksListView_Initialized"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    
 
-                        <oxy:PlotView 
+                    <Grid Grid.Row="1" Width="200" HorizontalAlignment="Left" Name="DatePickerGrid">
+
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0">From</TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1">To</TextBlock>
+                            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding
+            Path=FromDate,
+            Mode=TwoWay}"
+                                DisplayDateStart="1/01/2018" DisplayDateEnd="12/30/18" 
+                                   FirstDayOfWeek="Monday" Grid.Column="0"
+                                   Grid.Row="1"/>
+                            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding Path=ToDate, Mode=TwoWay}"
+                            DisplayDateStart="1/01/18" DisplayDateEnd="12/31/18" 
+                            FirstDayOfWeek="Monday" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                        <DockPanel Grid.Column="0"
+                            Grid.Row="0" LastChildFill="false" Width="200" HorizontalAlignment="Left">
+                        <TextBlock VerticalAlignment="Center" FontSize="20">All Tasks</TextBlock>
+                        <Border BorderThickness="5" DockPanel.Dock="Right" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+                            <Button Name="ShareBtn" Height="30" Width ="50" Click="ShareBtn_Click" >
+                                Share
+                            </Button>
+                        </Border>
+                        </DockPanel>
+
+                    <ListView HorizontalAlignment="Left" 
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            Name="Top5RecentTasksListView"
+                            Initialized="Top5RecentTasksListView_Initialized" MinWidth="200">
+                        <ListView.Resources>
+                            <local:DownloadedTaskType x:Key="myDataSource">
+                            </local:DownloadedTaskType> 
+                        </ListView.Resources>
+                        
+                        <ListView.DataContext>
+                            <Binding Source="{StaticResource myDataSource}" />
+
+                        </ListView.DataContext>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Width="200">
+                                    
+                                    <TextBlock Text="{Binding Path=TaskName}" FontWeight="Bold" FontSize="16"/>
+
+                                    <DockPanel LastChildFill="false">
+                                        <TextBlock Text="{Binding Path=TimeSpent, StringFormat={}{0:F1} Hours}" DockPanel.Dock="Left"/>
+                                        <TextBlock Text="{Binding Path=TaskDateTimeProperty, StringFormat={}{0:d}}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" DockPanel.Dock="Right"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <oxy:PlotView 
                         Grid.Column="1"  
                         Grid.Row="0" 
                         x:Name="Plot1" 
-                        Model="{Binding PlotModel}" Margin="10">
-                        </oxy:PlotView>
+                        Model="{Binding PlotModel}" Margin="10" Height="300">
+                </oxy:PlotView>
 
-                        <!--</StackPanel>-->
-                    </Grid>
-                </Grid>
-            </TabItem>
-            <Button Content="Button" Height="100" Width="75"/>
-        </TabControl>
+                <!--</StackPanel>-->
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock VerticalAlignment="Center" FontSize="20" Grid.Row="0">Tasks Shared With Me</TextBlock>
+                <ListView HorizontalAlignment="Left" 
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Name="TasksSharedWithMeList"
+                            Initialized="TasksSharedWithMeList_Initialized" Width="500"/>
+            </Grid>
+        </Grid>
 
     </Grid>
 </Page>

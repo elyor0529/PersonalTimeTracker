@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using OxyPlot;
+using System.Collections.ObjectModel;
 namespace TimeTracker
 {
     /// <summary>
@@ -23,12 +24,34 @@ namespace TimeTracker
     {
         private string sessionKey;
         List<DownloadedTaskType> top5List;
+        ObservableCollection<DownloadedTaskType> filteredTaskList;
+        List<SharedTask> sharedTaskList;
         TopRecentTaskPieSeriesModel chartModel;
+
         bool on = true;
         DispatcherTimer timer = new DispatcherTimer();
         public float taskTime;// = DateTime.Now.ToString("hh:mm tt");              //Output: 10:00 AM
         public DateTime tStart;
         public DateTime tStop;
+
+        DateTime fromDate;
+        DateTime toDate;
+        public DateTime FromDate { 
+        get { return fromDate; }
+        set
+            {
+                fromDate = value;
+                updateTaskList();
+                }
+        }
+        public DateTime ToDate { 
+            get {
+                return toDate;
+            } set {
+                toDate = value;
+                updateTaskList();
+            } }
+        
         public Home(string sessionKeyIn)
         {
             sessionKey = sessionKeyIn;
@@ -39,6 +62,12 @@ namespace TimeTracker
             TopRecentTaskContainer.DataContext = chartModel;
            // timer.Tick += new EventHandler(timer_Tick);
 
+            DatePickerGrid.DataContext = this;
+            Top5RecentTasksListView.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch;
+            filteredTaskList = new ObservableCollection<DownloadedTaskType>();
+            fromDate = DateTime.Today;
+            toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            updateTaskList();
 
         }
         
@@ -47,6 +76,12 @@ namespace TimeTracker
         {
             AddPreviousTaskDialog dlg = new AddPreviousTaskDialog(sessionKey);
 
+
+            // Configure the dialog box
+            dlg.Owner = Window.GetWindow(this);
+           // dlg.DocumentMargin = this.documentTextBox.Margin;
+
+
                dlg.ShowDialog();
 
         }
@@ -54,10 +89,46 @@ namespace TimeTracker
         private async void Top5RecentTasksListView_Initialized(object sender, EventArgs e)
         {
             RetrieveTaskResultType retrieveResult = await
-            ServerProxySingleton.serverProxy.GetAllTasks(new RetrieveTaskListData() { SessionKey = sessionKey });
+                ServerProxySingleton.serverProxy.GetAllTasks(new RetrieveTaskListData() { SessionKey = sessionKey });
             DownloadedTaskType[] taskListArray = retrieveResult.TaskList;
             top5List = new List<DownloadedTaskType>(taskListArray);
-            Top5RecentTasksListView.ItemsSource = top5List;
+            filteredTaskList = new ObservableCollection<DownloadedTaskType>(taskListArray);
+            Top5RecentTasksListView.ItemsSource = filteredTaskList;
+        }
+
+        private void ShareBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Top5RecentTasksListView.SelectedItems.Count > 0) {
+                var item = ((DownloadedTaskType)(Top5RecentTasksListView.SelectedItem));
+                    ShareDialog dlg = new ShareDialog(item.TaskName, item.getDateTime(), item.TimeSpent, sessionKey);
+                    dlg.CleanUp();
+                    dlg.Show();
+            }
+        }
+
+        private async void TasksSharedWithMeList_Initialized(object sender, EventArgs e)
+        {
+            GetTasksSharedWithMeResult retrieveResult = await
+            ServerProxySingleton.serverProxy.GetTasksSharedWithMe(new GetTasksSharedWithMeData() { SessionKey = sessionKey });
+            SharedTask[] taskListArray = retrieveResult.SharedTaskList;
+            sharedTaskList = new List<SharedTask>(taskListArray);
+            TasksSharedWithMeList.ItemsSource = sharedTaskList;
+        }
+
+        private async void updateTaskList() {
+            Console.WriteLine("update?");
+            RetrieveTaskResultType retrieveResult = await
+                ServerProxySingleton.serverProxy.GetAllTasks(new RetrieveTaskListData() { SessionKey = sessionKey });
+            DownloadedTaskType[] taskListArray = retrieveResult.TaskList;
+            top5List = new List<DownloadedTaskType>(taskListArray);
+            filteredTaskList.Clear();
+            foreach (DownloadedTaskType task in top5List ){
+                if (task.TaskDateTimeProperty.CompareTo(fromDate) >= 0 &&
+                    task.TaskDateTimeProperty.CompareTo(toDate) <= 0){
+                        filteredTaskList.Add(task);
+                    }
+            }
+            chartModel.Update(filteredTaskList, fromDate, toDate);
         }
 
         private void StartTimerBtn_Click(object sender, RoutedEventArgs e)
@@ -110,4 +181,5 @@ namespace TimeTracker
             addNewTask.ShowDialog();
         }
     }
+
 }
