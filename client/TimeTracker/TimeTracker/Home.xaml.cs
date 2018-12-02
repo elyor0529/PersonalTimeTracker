@@ -26,6 +26,12 @@ namespace TimeTracker
         List<DownloadedTaskType> top5List;
         ObservableCollection<DownloadedTaskType> filteredTaskList;
         List<SharedTask> sharedTaskList;
+        ObservableCollection<string> taskNamesSuggestion;
+        public ObservableCollection<string> TaskNamesSuggestion{
+            get{
+                return taskNamesSuggestion;
+            }
+        }
         TopRecentTaskPieSeriesModel chartModel;
 
         bool on = true;
@@ -67,6 +73,9 @@ namespace TimeTracker
             filteredTaskList = new ObservableCollection<DownloadedTaskType>();
             fromDate = DateTime.Today;
             toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            taskNamesSuggestion = new ObservableCollection<string>();
+            SuggestionStackPanel.DataContext = this;
+            updateSuggestions();
             updateTaskList();
 
         }
@@ -116,7 +125,6 @@ namespace TimeTracker
         }
 
         private async void updateTaskList() {
-            Console.WriteLine("update?");
             RetrieveTaskResultType retrieveResult = await
                 ServerProxySingleton.serverProxy.GetAllTasks(new RetrieveTaskListData() { SessionKey = sessionKey });
             DownloadedTaskType[] taskListArray = retrieveResult.TaskList;
@@ -130,7 +138,6 @@ namespace TimeTracker
             }
             chartModel.Update(filteredTaskList, fromDate, toDate);
         }
-
         private void StartTimerBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -180,6 +187,16 @@ namespace TimeTracker
             
             addNewTask.ShowDialog();
         }
-    }
 
+        private async void updateSuggestions(){
+            GetTaskNameSuggestionResultType result = await 
+                ServerProxySingleton.serverProxy.GetTaskNameSuggestions(new GetTaskNameSuggestionData{ SessionKey = sessionKey });
+            string[] stringArray = result.TaskNames;
+            taskNamesSuggestion.Clear();
+            for (int i = 0; i < stringArray.Length; i++) {
+                taskNamesSuggestion.Add(stringArray[i]);
+            }
+            
+        }
+    }
 }
