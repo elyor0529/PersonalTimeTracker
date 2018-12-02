@@ -23,11 +23,12 @@ namespace TimeTracker
     {
         private SessionType sessionObj;
         private LoginResultType resultObj;
+        private RecoverPassword recoverPasswordPage;
         
         public Login()
         {
             InitializeComponent();
-           
+            recoverPasswordPage = new RecoverPassword();
         }
 
         private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
@@ -135,9 +136,12 @@ namespace TimeTracker
             }
         }
 
-        private void ForgotPasswordBtn_Click(object sender, RoutedEventArgs e)
+        private async void ForgotPasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
+            recoverPasswordPage.setSessionKey(sessionObj.Session);
+            recoverPasswordPage.CleanUp();
+            NavigationService.Navigate(recoverPasswordPage);
         }
     }
 }
