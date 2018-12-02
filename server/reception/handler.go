@@ -119,3 +119,64 @@ func GetAllTasksHandler ( writer http.ResponseWriter, requestPtr *http.Request )
 	writer.Write ( jsonByteArr )
 }
 
+func RecoverPasswordHandler ( writer http.ResponseWriter, requestPtr *http.Request ) {
+	var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+	body, error := ioutil.ReadAll( bodyIncompleteReader )
+  fmt.Printf("len is %d\n",len(body))
+  if  error != nil  {
+		log.Printf( "error %s\n", error.Error() );
+	}
+	responseData, err  := businesslogic.RecoverPassword(body)
+	if err == nil {
+		writer.WriteHeader( http.StatusOK)
+	} else {
+		writer.WriteHeader( http.StatusInternalServerError)
+	}
+	jsonByteArr, _ := json.Marshal( responseData )
+	writer.Write ( jsonByteArr )
+}
+
+func ShareTaskWithHandler( writer http.ResponseWriter, requestPtr *http.Request ) {
+	var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+	body, error := ioutil.ReadAll( bodyIncompleteReader )
+  fmt.Printf("len is %d\n",len(body))
+  if  error != nil  {
+		log.Printf( "error %s\n", error.Error() );
+	}
+	var request businesslogic.AddSharedTaskRequest
+	err := json.Unmarshal( body[:],  &request)
+	var result businesslogic.AddSharedTaskResult
+
+	if err != nil {
+    log.Println(err.Error())
+		result = businesslogic.AddSharedTaskResult {
+			AddSharedTaskResult: "Incompatible JSON request structure.",
+			SessionKey: request.SessionKey}
+  } else {
+		result = businesslogic.AddSharedTask(&request, getEmailBySession(request.SessionKey))
+	}
+	jsonByteArr, error := json.Marshal( result )
+	writer.Write ( jsonByteArr )
+}
+
+func GetAllTasksSharedWithMeHandler(writer http.ResponseWriter, requestPtr *http.Request ) {
+	var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+	body, error := ioutil.ReadAll( bodyIncompleteReader )
+  fmt.Printf("len is %d\n",len(body))
+  if  error != nil  {
+		log.Printf( "error %s\n", error.Error() );
+	}
+	var request businesslogic.GetAllSharedTasksByEmailToRequest
+	err := json.Unmarshal( body[:],  &request)
+  var result businesslogic.GetAllSharedTasksByEmailToResult
+	if err != nil {
+    log.Println(err.Error())
+		result = businesslogic.GetAllSharedTasksByEmailToResult {
+			GetAllSharedTasksResult: "Incompatible JSON request structure.",
+			SharedTaskList: nil,
+		}
+  }
+	result = businesslogic.GetAllTasksSharedWithMe(getEmailBySession(request.SessionKey))
+	jsonByteArr, error := json.Marshal( result )
+	writer.Write ( jsonByteArr )
+}
