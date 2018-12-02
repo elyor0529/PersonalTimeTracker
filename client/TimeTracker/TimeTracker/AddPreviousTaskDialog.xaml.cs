@@ -26,6 +26,7 @@ namespace TimeTracker
         private SendTaskResultType sendTaskDataObj;
         private string sessionKey;
         private string dt;
+        private DateTime dateTime;
         public AddPreviousTaskDialog(string sessionKeyIn)
         {
             InitializeComponent();
@@ -40,8 +41,14 @@ namespace TimeTracker
             float time;// = GetTime(TaskTime.Text);
             bool success = float.TryParse(TaskTime.Text, out time);
             bool isDigit = IsDigitAllowed(TaskTime.Text);
-            dt = PickDate.Text;
-            DateTime dateTime = DateTime.Parse(dt);
+            bool isText = IsTextAllowed(PickDate.Text);
+            if (isText == true)
+            {
+                dt = PickDate.Text;
+                dateTime = DateTime.Parse(dt);
+            }
+
+            //else { MessageBox.Show("Invalid date");}
             TaskData task = new TaskData
             {
 
@@ -52,7 +59,7 @@ namespace TimeTracker
 
             };
     
-            if (correctTaskInput == true && success == true)
+            if (correctTaskInput == true && success == true && isDigit == true && isText ==true)
             {
                 
                 sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
@@ -77,9 +84,9 @@ namespace TimeTracker
         }
         private bool VerifyInput()
         {
-            if(TaskName.Text == "" || TaskTime.Text == "")
+            if(TaskName.Text == "" || TaskTime.Text == "" || PickDate.Text =="")
             {
-                MessageBox.Show("Task and Time must be provided");
+                MessageBox.Show("Task , Date and Time must be provided");
                 return false;
 
             }

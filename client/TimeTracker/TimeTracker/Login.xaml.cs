@@ -51,7 +51,7 @@ namespace TimeTracker
             if (correctEmail == true && correctInput == true) {
                 sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
                 log.SessionKey = sessionObj.Session;
-
+                
                 resultObj = await ServerProxySingleton.serverProxy.LogIn(log);
                 if (resultObj.IsSuccess()) 
 

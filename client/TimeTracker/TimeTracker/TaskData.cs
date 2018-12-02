@@ -25,7 +25,19 @@ namespace TimeTracker
         [DataMember]
         public string SessionKey;
 
-        public DateTime TaskDateTime;
+        private DateTime taskDateTime;
+        public DateTime TaskDateTime
+        {
+            get
+            {
+                return taskDateTime;
+            }
+            set
+            {
+                taskDateTime = value.ToUniversalTime();
+                TaskDate = XmlConvert.ToString(taskDateTime, XmlDateTimeSerializationMode.Utc);
+            }
+        } 
 
         private static DataContractJsonSerializer serializerTaskData =
             new DataContractJsonSerializer(typeof(TaskData));
