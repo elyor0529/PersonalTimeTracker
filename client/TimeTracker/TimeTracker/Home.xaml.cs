@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using OxyPlot;
 namespace TimeTracker
 {
@@ -23,24 +24,30 @@ namespace TimeTracker
         private string sessionKey;
         List<DownloadedTaskType> top5List;
         TopRecentTaskPieSeriesModel chartModel;
+        bool on = true;
+        DispatcherTimer timer = new DispatcherTimer();
+        public float taskTime;// = DateTime.Now.ToString("hh:mm tt");              //Output: 10:00 AM
+        public DateTime tStart;
+        public DateTime tStop;
         public Home(string sessionKeyIn)
         {
             sessionKey = sessionKeyIn;
             InitializeComponent();
             chartModel = new TopRecentTaskPieSeriesModel();
+           // taskData.TaskDateTime = DateTime.Now;
+            //StartTimerBtn.Content = "Timer Off";
             TopRecentTaskContainer.DataContext = chartModel;
+           // timer.Tick += new EventHandler(timer_Tick);
+
+
         }
+        
 
         private void AddPreviousTaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddPreviousTaskDialog dlg = new AddPreviousTaskDialog();
+            AddPreviousTaskDialog dlg = new AddPreviousTaskDialog(sessionKey);
 
-            // Configure the dialog box
-            //dlg.Owner = this;
-           // dlg.DocumentMargin = this.documentTextBox.Margin;
-
-            // Open the dialog box modally 
-            dlg.ShowDialog();
+               dlg.ShowDialog();
 
         }
 
@@ -51,6 +58,56 @@ namespace TimeTracker
             DownloadedTaskType[] taskListArray = retrieveResult.TaskList;
             top5List = new List<DownloadedTaskType>(taskListArray);
             Top5RecentTasksListView.ItemsSource = top5List;
+        }
+
+        private void StartTimerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+             
+
+            if (on)
+            {
+
+              //  InitializeTimer();
+                StartTimerBtn.Content = "Timer On";
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.IsEnabled = true;
+                timer.Start();
+                tStart = DateTime.Now;
+                lblTimer.Content = DateTime.Now.ToLongTimeString();
+               
+                on = false;
+            }
+            else {
+
+                StartTimerBtn.Content = "Timer Off";
+                timer.Stop();
+                tStop =DateTime.Now;
+                lblTimer.Content = DateTime.Now.ToLongTimeString();
+                //lblTimer.Content = "";
+                //timer.IsEnabled = false;
+                on = true;
+               
+            }
+            
+            TimeSpan spanMe = tStop.Subtract(tStart);
+            
+
+            taskTime = spanMe.Hours+ spanMe.Minutes;
+        }
+
+        private void myTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void StartTrackingTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            AddTask addNewTask = new AddTask(sessionKey,taskTime);
+            
+            addNewTask.ShowDialog();
         }
     }
 }

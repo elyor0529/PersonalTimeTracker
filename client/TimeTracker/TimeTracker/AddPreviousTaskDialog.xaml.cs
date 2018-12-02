@@ -25,7 +25,7 @@ namespace TimeTracker
         private SessionType sessionObj;
         private SendTaskResultType sendTaskDataObj;
         private string sessionKey;
-        
+        private string dt;
         public AddPreviousTaskDialog(string sessionKeyIn)
         {
             InitializeComponent();
@@ -40,12 +40,15 @@ namespace TimeTracker
             float time;// = GetTime(TaskTime.Text);
             bool success = float.TryParse(TaskTime.Text, out time);
             bool isDigit = IsDigitAllowed(TaskTime.Text);
+            dt = PickDate.Text;
+            DateTime dateTime = DateTime.Parse(dt);
             TaskData task = new TaskData
             {
 
                 TaskName = TaskName.Text,
                 TimeSpent = time,
-                
+                TaskDate = PickDate.Text,
+                TaskDateTime = dateTime,
 
             };
     

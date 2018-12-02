@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TimeTracker
 {
@@ -23,13 +25,23 @@ namespace TimeTracker
         private SessionType sessionObj;
         private SendTaskResultType sendTaskDataObj;
         private string sessionKey;
+        DispatcherTimer timer = new DispatcherTimer();
+        private DateTime dt;
+        
+        private float taskTime;
+
         public AddTask(string sessionKeyIn)
         {
             InitializeComponent();
 
             sessionKey = sessionKeyIn;
+            
 
+        }
 
+        public AddTask(string sessionKeyIn, float taskTimeIn) : this(sessionKeyIn)
+        {
+            this.taskTime = taskTimeIn;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -42,30 +54,31 @@ namespace TimeTracker
             bool correctTaskInput = VerifyInput();
             //  bool isText = IsTextAllowed(TaskName.Text);
             float time;// = GetTime(TaskTime.Text);
-            bool success = float.TryParse(TaskTime.Text, out time);
-            bool isDigit = IsDigitAllowed(TaskTime.Text);
+            
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.IsEnabled = true;
+            timer.Start();
+            DateTime dt = DateTime.Now;
             TaskData task = new TaskData
             {
 
                 TaskName = TaskName.Text,
-                TimeSpent = time,
-
+                TaskDateTime = dt,
 
             };
 
-            if (correctTaskInput == true && success == true)
+            if (correctTaskInput == true)
             {
 
-                sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
                 task.SessionKey = sessionKey;
+                task.TimeSpent = taskTime;
                 sendTaskDataObj = await ServerProxySingleton.serverProxy.SendTask(task);
                 if (sendTaskDataObj.IsSuccess())
 
                 {
 
                     MessageBox.Show("Successful Adding Task");
-                    TaskTime.Clear();
-                    TaskName.Clear();
+                     TaskName.Clear();
 
                 }
 
@@ -80,65 +93,21 @@ namespace TimeTracker
 
         private bool VerifyInput()
         {
-            if (TaskName.Text == "" || TaskTime.Text == "")
-            {
-                MessageBox.Show("Task and Time must be provided");
-                return false;
-
-            }
             if (TaskName.Text == "")
             {
-                MessageBox.Show("Task Name must be provided");
+                MessageBox.Show("Task must be provided");
                 return false;
 
             }
-            if (TaskTime.Text == "")
-            {
-                MessageBox.Show("Task Time must be provided");
-                return false;
-
-            }
+           
             if (IsTextAllowed(TaskName.Text) == false)
             {
                 MessageBox.Show("Task Name must be alphabet value");
                 return false;
 
             }
-            if (IsDigitAllowed(TaskTime.Text) == false)
-            {
-                MessageBox.Show("Task Time must be numeric value");
-                return false;
-
-            }
-            if (TaskName.Text == "" && IsDigitAllowed(TaskTime.Text) == false)
-            {
-
-                MessageBox.Show("Numeric value for Time must be provided");
-                TaskTime.Clear();
-                return false;
-            }
-
-            if (TaskTime.Text == "" && IsTextAllowed(TaskName.Text) == false)
-            {
-                MessageBox.Show("Text Name must be provided");
-                TaskName.Clear();
-                return false;
-            }
-            if (IsTextAllowed(TaskName.Text) == false && TaskTime.Text == "")
-            {
-
-                MessageBox.Show("Please Enter Correct Text format");
-                TaskName.Clear();
-                return false;
-            }
-            if (IsTextAllowed(TaskTime.Text) == false && TaskName.Text == null)
-            {
-
-                MessageBox.Show("Please Enter numeric value");
-                TaskTime.Clear();
-                return false;
-            }
-            if (IsTextAllowed(TaskName.Text) == false && IsTextAllowed(TaskName.Text) == true)
+           
+           if (IsTextAllowed(TaskName.Text) == false && IsTextAllowed(TaskName.Text) == true)
             {
 
                 MessageBox.Show("Please Enter Text value");
@@ -146,32 +115,7 @@ namespace TimeTracker
                 return false;
             }
 
-            if (IsDigitAllowed(TaskTime.Text) == false && IsTextAllowed(TaskName.Text) == true)
-
-            {
-
-                MessageBox.Show("Please Enter numeric value");
-                TaskTime.Clear();
-                return false;
-
-            }
-            if (TaskTime.Text == null && IsTextAllowed(TaskName.Text) == true)
-            {
-
-                MessageBox.Show("Please Enter Time value");
-                return false;
-            }
-            if (TaskName.Text == null && IsDigitAllowed(TaskTime.Text) == true)
-
-            {
-
-                MessageBox.Show("Please Enter Task value");
-
-                return false;
-
-            }
-
-            else
+          else
             {
                 return true;
             }
