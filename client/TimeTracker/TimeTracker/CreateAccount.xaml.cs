@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,9 @@ namespace TimeTracker
         {
             bool correctInput = VerifyInput(FirstName.Text,MiddleName.Text,LastName.Text, Email.Text, Password.Password,RetypePassword.Password);
             bool correctEmail = VerifyEmail(Email.Text);
+            bool isFirstName = IsTextAllowed(FirstName.Text);
+            bool isMiddleName = IsTextAllowed(MiddleName.Text);
+            bool isLastName = IsTextAllowed(LastName.Text);
             CreateAccountData createAccount = new CreateAccountData {
 
                 FirstName = FirstName.Text,
@@ -40,7 +44,7 @@ namespace TimeTracker
                 Password = Password.Password
 
             };
-            if (correctEmail == true && correctInput == true) {
+            if (correctEmail == true && correctInput == true && isFirstName == true && isMiddleName == true && isLastName ==true) {
 
                 sessionObj = await ServerProxySingleton.serverProxy.GetUnauthorizedSession();
                 createAccount.SessionKey = sessionObj.Session;
@@ -74,13 +78,20 @@ namespace TimeTracker
                 catch
                 {
 
-                    MessageBox.Show("Invalid Email");
+                   // MessageBox.Show("Invalid Email");
                     return false;
 
                 }
             }
 
             return true;
+        }
+       
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regx = new Regex("^[a-zA-Z]+$");
+            if (!regx.IsMatch(text)) { return false; }
+            else { return regx.IsMatch(text); }
         }
         private bool VerifyInput(String firstname,String middlename, String lastname, String email, String password,String retypepassword)
         {
@@ -93,15 +104,50 @@ namespace TimeTracker
 
                 
             }
-
-            else if (RetypePassword.Password != Password.Password)
+           
+            if (IsTextAllowed(FirstName.Text) == false)
             {
-
-                MessageBox.Show("Password Doesn't match");
-
+                MessageBox.Show("First Name must be alphabet value");
+                FirstName.Clear();
+                FirstName.Focus();
                 return false;
 
             }
+            if (IsTextAllowed(MiddleName.Text) == false)
+            {
+                MessageBox.Show("Middle Name must be alphabet value");
+                MiddleName.Clear();
+                MiddleName.Focus();
+                return false;
+
+            }
+            if (IsTextAllowed(LastName.Text) == false)
+            {
+                MessageBox.Show("Last Name must be alphabet value");
+                LastName.Clear();
+                LastName.Focus();
+                return false;
+
+            }
+            if (VerifyEmail(Email.Text) == false)
+            {
+                MessageBox.Show("Invalid email Email");
+                Email.Clear();
+                Focus();
+                return false;
+
+            }
+            if (RetypePassword.Password != Password.Password)
+            {
+
+                MessageBox.Show("Password Doesn't match");
+                Password.Clear();
+                RetypePassword.Clear();
+                Password.Focus();
+                return false;
+
+            }
+
             else
             {
                 return true;
