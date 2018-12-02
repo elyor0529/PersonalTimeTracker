@@ -17,6 +17,7 @@ type Account struct{
 var insertAccountString = "INSERT INTO Account (email, timezone, encryptedpasswordhash, firstname, lastname, middlename) values ($1, $2, $3, $4, $5, $6);"
 var selectAccountByEmailString = "Select * from Account where email = $1"
 var matchEmailPasswordString = "Select * from Account where email = $1 and encryptedpasswordhash = $2"
+var updatePasswordString = "Update Account set encryptedPasswordHash=$1 where email = $2"
 
 func MakeAccount(email *string, timezone int, encryptedPasswordHash *string, firstName *string, lastName *string, middleName *string) *Account{
   account := new(Account)
@@ -65,4 +66,16 @@ func MatchEmailPassword( account *Account) error{
 		}
 	}
 	return stmterr
+}
+
+func RecoverPassword ( account *Account, newPassword string) (error){
+	_, stmterr := globalOrm.orm.Query(updatePasswordString, newPassword, account.email);
+	if stmterr != nil {
+		log.Println("statement error : " + stmterr.Error())
+	}
+	return stmterr
+}
+
+func SetEmail(account *Account, email string){
+	account.email = email
 }
