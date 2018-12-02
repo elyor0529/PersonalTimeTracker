@@ -31,6 +31,17 @@ type CreateAccountRequestResult struct {
 	SessionKey          string
 }
 
+type UpdatePasswordRequest struct {
+	Email string
+	SessionKey string
+}
+
+type UpdatePasswordRequestResult struct {
+	UpdatePasswordResult string
+	SessionKey string
+
+}
+
 type AddTaskRequestData struct {
 	TaskName   string
 	TimeSpent  float64
@@ -40,6 +51,28 @@ type AddTaskRequestData struct {
 
 type AddTaskRequestResult struct {
 	AddResult string
+}
+
+type AddSharedTaskRequest struct {
+	TaskName string
+	TaskDate string
+	TaskTimeSpent float64
+	EmailTo string
+	SessionKey string 
+}
+
+type AddSharedTaskResult struct {
+	AddSharedTaskResult string
+	SessionKey string 
+}
+
+type GetAllSharedTasksByEmailToRequest struct {
+	SessionKey string
+}
+
+type GetAllSharedTasksByEmailToResult struct {
+	GetAllSharedTasksResult string
+	SharedTaskList []datastore.SharedTaskFromDb
 }
 
 type RetrieveTaskListRequestData struct {
