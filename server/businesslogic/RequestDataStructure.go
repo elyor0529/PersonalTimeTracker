@@ -75,6 +75,16 @@ type GetAllSharedTasksByEmailToResult struct {
 	SharedTaskList []datastore.SharedTaskFromDb
 }
 
+type GetTaskNameSuggestionRequest struct {
+	SessionKey string
+}
+
+type GetTaskNameSuggestionResult struct {
+	GetTaskNameSuggestionResult string
+	TaskNames []string
+}
+
+
 type RetrieveTaskListRequestData struct {
 	SessionKey string
 }

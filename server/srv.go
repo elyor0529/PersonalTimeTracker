@@ -22,6 +22,7 @@ func main() {
 	http.HandleFunc("/RecoverPassword", reception.RecoverPasswordHandler)
 	http.HandleFunc("/ShareTaskWith", reception.ShareTaskWithHandler)
 	http.HandleFunc("/GetAllTasksSharedWithMe", reception.GetAllTasksSharedWithMeHandler)
+	http.HandleFunc("/GetTaskNameSuggestion", reception.GetTaskNameSuggestionHandler)
 	http.ListenAndServe(":8000", nil)
 
 }

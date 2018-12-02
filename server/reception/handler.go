@@ -180,3 +180,26 @@ func GetAllTasksSharedWithMeHandler(writer http.ResponseWriter, requestPtr *http
 	jsonByteArr, error := json.Marshal( result )
 	writer.Write ( jsonByteArr )
 }
+
+func GetTaskNameSuggestionHandler (writer http.ResponseWriter, requestPtr *http.Request ) {
+	var bodyIncompleteReader io.ReadCloser = requestPtr.Body	
+	body, error := ioutil.ReadAll( bodyIncompleteReader )
+  fmt.Printf("len is %d\n",len(body))
+  if  error != nil  {
+		log.Printf( "error %s\n", error.Error() );
+	}
+	var request businesslogic.GetTaskNameSuggestionRequest
+	err := json.Unmarshal( body[:],  &request)
+  var result businesslogic.GetTaskNameSuggestionResult
+	if err != nil {
+    log.Println(err.Error())
+		result = businesslogic.GetTaskNameSuggestionResult {
+			GetTaskNameSuggestionResult: "Incompatible JSON request structure.",
+			TaskNames: nil,
+		}
+  } else {
+		result = businesslogic.GetUniqueTaskNames(getEmailBySession(request.SessionKey))
+	}
+	jsonByteArr, error := json.Marshal( result )
+	writer.Write ( jsonByteArr )
+}

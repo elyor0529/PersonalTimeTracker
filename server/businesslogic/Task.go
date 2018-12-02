@@ -32,3 +32,18 @@ func GetTasks( sessionEmail string ) RetrieveTaskListRequestResult{
 		}
 	}
 }
+
+func GetUniqueTaskNames ( sessionEmail string ) GetTaskNameSuggestionResult {
+	result,err := datastore.GetUniqueTaskNames( sessionEmail )
+	if err != nil {
+		return GetTaskNameSuggestionResult {
+			GetTaskNameSuggestionResult: "Failure",
+			TaskNames: nil,
+		}
+	} else {
+		return GetTaskNameSuggestionResult {
+			GetTaskNameSuggestionResult: "Success",
+			TaskNames: result[:],
+		}
+	}
+}

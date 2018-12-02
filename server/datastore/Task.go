@@ -21,6 +21,8 @@ type TaskFromDb struct{
 var insertTaskString = "INSERT INTO Task (taskId, taskName, timeSpent, taskDate, email) values (uuid_generate_v4(),$1, $2, $3, $4);"
 var selectTasksByEmailString = "Select taskname, timespent, taskDate from Task where email = $1"
 var selectCountTasksByEmail = "Select Count(*) as count from Task where email = $1"
+var selectTaskNamesFromTask = "Select Distinct TaskName from Task where email = $1"
+var selectCountTaskNamesFromTask = "Select Distinct Count(TaskName) from Task where email = $1"
 
 func MakeTask( name *string, duration *float64, email *string, taskDateInput *string)  *Task {
 	task := new(Task)
@@ -85,6 +87,40 @@ func SelectTasksByEmail( email string ) ([](TaskFromDb), error) {
 				taskMap[taskMapCounter].TimeSpent = timeSpent
 				taskMap[taskMapCounter].TaskDate = taskDate
 				taskMapCounter++
+			}
+			return taskMap[:], nil
+		}
+}
+
+func GetUniqueTaskNames(email string) ([]string, error){
+	countRows, counterr := globalOrm.orm.Query(selectCountTaskNamesFromTask, email)
+	if (counterr != nil) {
+		log.Println("statement error : " + counterr.Error())
+		return nil, counterr
+	}
+	var rowsCount int
+	for countRows.Next() {
+		countRows.Scan(&rowsCount)
+	}
+	countRows.Scan(&rowsCount)
+	rows, stmterr := globalOrm.orm.Query(selectTaskNamesFromTask, email)
+	if stmterr != nil {
+		log.Println("statement error : " + stmterr.Error())
+			return nil, stmterr
+	} else {
+			//log.Printf("rowsCount for GetAllTasks is %d\n", rowsCount)
+			taskMap := make( [](string), rowsCount)
+			taskMapCounter := 0
+			var taskFromDbPtr *string
+			var taskName string
+			if (rowsCount > 0) {
+				for rows.Next()  {
+					rows.Scan( &taskName)
+					taskFromDbPtr = new(string)
+					*taskFromDbPtr = taskName
+					taskMap[taskMapCounter] = *taskFromDbPtr
+					taskMapCounter++
+				}
 			}
 			return taskMap[:], nil
 		}
