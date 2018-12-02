@@ -67,24 +67,24 @@
                             <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0">From</TextBlock>
-                            <TextBlock Grid.Row="0" Grid.Column="1">To</TextBlock>
-                            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding
-            Path=FromDate,
-            Mode=TwoWay}"
-                                DisplayDateStart="1/01/2018" DisplayDateEnd="12/30/18" 
-                                   FirstDayOfWeek="Monday" Grid.Column="0"
-                                   Grid.Row="1"/>
-                            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding Path=ToDate, Mode=TwoWay}"
-                            DisplayDateStart="1/01/18" DisplayDateEnd="12/31/18" 
-                            FirstDayOfWeek="Monday" Grid.Row="1" Grid.Column="1"/>
-                        </Grid>
-                        <DockPanel Grid.Column="0"
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0">From</TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1">To</TextBlock>
+                        <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding
+                            Path=FromDate,
+                            Mode=TwoWay}"
+                            DisplayDateStart="1/01/2018" DisplayDateEnd="12/30/18" 
+                               FirstDayOfWeek="Monday" Grid.Column="0"
+                               Grid.Row="1"/>
+                        <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding Path=ToDate, Mode=TwoWay}"
+                        DisplayDateStart="1/01/18" DisplayDateEnd="12/31/18" 
+                        FirstDayOfWeek="Monday" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                    <DockPanel Grid.Column="0"
                             Grid.Row="0" LastChildFill="false" Width="200" HorizontalAlignment="Left">
                         <TextBlock VerticalAlignment="Center" FontSize="20">All Tasks</TextBlock>
                         <Border BorderThickness="5" DockPanel.Dock="Right" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
@@ -140,7 +140,10 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" FontSize="20" Grid.Row="0">Tasks Shared With Me</TextBlock>
+                <StackPanel Grid.Row="0" Height="30" Orientation="Horizontal" Name="SuggestionStackPanel">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment ="Left" FontSize="20" >Tasks Shared With Me</TextBlock>
+                    <ComboBox Name="TaskNameSuggestionComboBox" Width="100" IsEditable="True" ItemsSource="{Binding TaskNamesSuggestion}"></ComboBox>
+                </StackPanel>
                 <ListView HorizontalAlignment="Left" 
                             Grid.Column="0"
                             Grid.Row="1"
