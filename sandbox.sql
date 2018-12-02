@@ -1,4 +1,5 @@
 create extension "uuid-ossp";
+drop table if exists Tasksharing;
 drop table if exists Task;
 drop table if exists Account;
 create table Account (
@@ -18,7 +19,17 @@ create table Task(
   email varchar(30) REFERENCES Account(email)
 );
 
+create table TaskSharing(
+	emailFrom varchar(30) references Account(email),
+	taskId UUID references Task(taskId),
+	emailTo varchar(30) references Account(email),
+	Unique(emailFrom, taskId, emailTo),
+	Primary Key(emailFrom, taskId, emailTo)
+);
+
 insert into Account values('guest@abc.com', 4, 'abc', 'John', 'M.', 'Doe');
+insert into Account values('newuser@abc.com', 4, 'abc', 'User', 'M.', 'New');
+
 insert into Task values(uuid_generate_v4(), 'running', 1, TIMESTAMP '2018-01-01 6:00:00', 'guest@abc.com');
 insert into Task values(uuid_generate_v4(), 'reading', 1, TIMESTAMP '2018-01-11 7:00:00', 'guest@abc.com');
 insert into Task values(uuid_generate_v4(), 'writing', 1, TIMESTAMP '2018-01-01 8:00:00', 'guest@abc.com');
