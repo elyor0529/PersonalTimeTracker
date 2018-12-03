@@ -79,10 +79,38 @@
                             Mode=TwoWay}"
                             DisplayDateStart="1/01/2018" DisplayDateEnd="12/30/18" 
                                FirstDayOfWeek="Monday" Grid.Column="0"
-                               Grid.Row="1"/>
+                               Grid.Row="1">
+                            <DatePicker.Resources>
+                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Control.Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <TextBox x:Name="PART_TextBox"
+     Text="{Binding Path=SelectedDate, StringFormat='MMM, dd yy', 
+     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
                         <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding Path=ToDate, Mode=TwoWay}"
                         DisplayDateStart="1/01/18" DisplayDateEnd="12/31/18" 
-                        FirstDayOfWeek="Monday" Grid.Row="1" Grid.Column="1"/>
+                        FirstDayOfWeek="Monday" Grid.Row="1" Grid.Column="1">
+                            <DatePicker.Resources>
+                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Control.Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <TextBox x:Name="PART_TextBox"
+     Text="{Binding Path=SelectedDate, StringFormat='MMM, dd yy', 
+     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
                     </Grid>
                     <DockPanel Grid.Column="0"
                             Grid.Row="0" LastChildFill="false" Width="200" HorizontalAlignment="Left">
@@ -115,7 +143,7 @@
                                     <TextBlock Text="{Binding Path=TaskName}" FontWeight="Bold" FontSize="16"/>
 
                                     <DockPanel LastChildFill="false">
-                                        <TextBlock Text="{Binding Path=TimeSpent, StringFormat={}{0:F1} Hours}" DockPanel.Dock="Left"/>
+                                        <TextBlock Text="{Binding Path=TimeSpent, StringFormat={}{0:F3} Hours}" DockPanel.Dock="Left"/>
                                         <TextBlock Text="{Binding Path=TaskDateTimeProperty, StringFormat={}{0:d}}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" DockPanel.Dock="Right"/>
                                     </DockPanel>
                                 </StackPanel>
@@ -138,17 +166,38 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Height="30" Orientation="Horizontal" Name="SuggestionStackPanel">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment ="Left" FontSize="20" >Tasks Shared With Me</TextBlock>
-                    <ComboBox Name="TaskNameSuggestionComboBox" Width="100" IsEditable="True" ItemsSource="{Binding TaskNamesSuggestion}"></ComboBox>
+                    <!--<ComboBox Name="TaskNameSuggestionComboBox" Width="100" IsEditable="True" ItemsSource="{Binding TaskNamesSuggestion}"></ComboBox>-->
                 </StackPanel>
                 <ListView HorizontalAlignment="Left" 
                             Grid.Column="0"
                             Grid.Row="1"
                             Name="TasksSharedWithMeList"
-                            Initialized="TasksSharedWithMeList_Initialized" Width="500"/>
+                            Initialized="TasksSharedWithMeList_Initialized" Width="500">
+                    <ListView.Resources>
+                        <local:SharedTask x:Key="sharedTaskSource">
+                        </local:SharedTask>
+                    </ListView.Resources>
+
+                    <ListView.DataContext>
+                        <Binding Source="{StaticResource sharedTaskSource}" />
+
+                    </ListView.DataContext>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="200">
+
+                                <TextBlock Text="{Binding Path=TaskName}" FontWeight="Bold" FontSize="16"/>
+                                <TextBlock Text="{Binding Path=TimeSpent, StringFormat={}{0:F3} Hours\,}"/>
+                                <TextBlock Text="{Binding Path=EmailFrom}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                                <TextBlock Text="{Binding Path=TaskDateTime, StringFormat={}{0:d}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </Grid>
 

@@ -77,13 +77,13 @@ namespace TimeTracker
             SuggestionStackPanel.DataContext = this;
             updateSuggestions();
             updateTaskList();
-
+            
         }
         
 
         private void AddPreviousTaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddPreviousTaskDialog dlg = new AddPreviousTaskDialog(sessionKey);
+            AddPreviousTaskDialog dlg = new AddPreviousTaskDialog(sessionKey, TaskNamesSuggestion);
 
 
             // Configure the dialog box
@@ -91,7 +91,11 @@ namespace TimeTracker
            // dlg.DocumentMargin = this.documentTextBox.Margin;
 
 
-               dlg.ShowDialog();
+               var needsUpdate = dlg.ShowDialog();
+               if (needsUpdate == true) {
+                updateTaskList();
+                updateSuggestions();
+               }
 
         }
 
@@ -172,7 +176,7 @@ namespace TimeTracker
             TimeSpan spanMe = tStop.Subtract(tStart);
             
 
-            taskTime = spanMe.Hours+ spanMe.Minutes;
+            taskTime = spanMe.Hours+ ((float)spanMe.Minutes)/60;
         }
 
         private void myTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -183,9 +187,13 @@ namespace TimeTracker
         private void StartTrackingTaskBtn_Click(object sender, RoutedEventArgs e)
         {
             
-            AddTask addNewTask = new AddTask(sessionKey,taskTime);
-            
-            addNewTask.ShowDialog();
+            AddTask addNewTask = new AddTask(sessionKey,taskTime, taskNamesSuggestion);
+            addNewTask.Owner = Window.GetWindow(this);
+            var needsUpdate = addNewTask.ShowDialog();
+            if (needsUpdate == true) {
+                updateTaskList();
+                updateSuggestions();
+            }
         }
 
         private async void updateSuggestions(){
