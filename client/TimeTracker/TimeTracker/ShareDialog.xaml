@@ -5,13 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTracker"
         mc:Ignorable="d"
-        Title="ShareDialog" Height="100" Width="300">
-    <Grid>
-        <StackPanel>
-        <TextBlock>Share task with</TextBlock>
-        <TextBox Name="Email"></TextBox>
-        <Button Name="shareBtn" Click="shareBtn_Click">share</Button>
-            <TextBlock Name="resultTextBlock"></TextBlock>
+        Title="ShareDialog" Height="150" Width="300">
+    <Grid VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="20"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0">Share task with email: </TextBlock>
+                <TextBox Name="Email" Width="100" Grid.Row="0" Grid.Column="1"></TextBox>
+                <Button Name="shareBtn" Click="shareBtn_Click" Width="100" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">share</Button>
+                <TextBlock Name="resultTextBlock" Grid.Row="3" Grid.ColumnSpan="2"></TextBlock>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>
