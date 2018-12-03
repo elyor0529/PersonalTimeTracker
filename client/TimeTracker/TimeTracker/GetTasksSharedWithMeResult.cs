@@ -35,18 +35,18 @@ namespace TimeTracker
     public class SharedTask
     {
         [DataMember]
-        public string TaskName;
+        public string TaskName { get; set; }
 
         [DataMember]
-        public double TimeSpent;
+        public double TimeSpent { get; set; }
 
         [DataMember]
-        public string TaskDate;
+        public string TaskDate { get; set; }
 
         [DataMember]
-        public string EmailFrom;
+        public string EmailFrom { get; set; }
 
-        public DateTime TaskDateTime;
+        public DateTime TaskDateTime { get; set; }
 
         public void parseDate()
         {
