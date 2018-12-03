@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTracker"
         mc:Ignorable="d"
-        Title="AddTask" Height="450" Width="800">
-    <Grid HorizontalAlignment="Left" Height="224" VerticalAlignment="Top" Width="485" RenderTransformOrigin="2.377,1.674" Margin="133,55,0,0">
+        Title="AddTask" Height="450" Width="800" Closing="Window_Closing">
+    <Grid HorizontalAlignment="Left" Height="224" VerticalAlignment="Top" Width="485" RenderTransformOrigin="2.377,1.674" Margin="133,55,0,0" Name="Grid">
         <Label Content="Task Name" HorizontalAlignment="Left" Margin="69,49,0,0" VerticalAlignment="Top" Width="110" Height="24" RenderTransformOrigin="0.746,0.68"/>
         <Button Content="Add" Margin="229,78,177,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.485,1.648" Click="Button_Click"/>
-        <TextBox Name="TaskName" HorizontalAlignment="Left" Height="24" Margin="184,49,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.128,-2.755"/>
-
+        <ComboBox IsEditable="True" Name="TaskName" ItemsSource="{Binding TaskNames}" HorizontalAlignment="Left" Height="24" Margin="184,49,0,0"  VerticalAlignment="Top" Width="173" RenderTransformOrigin="0.128,-2.755"/>
     </Grid>
 
 </Window>

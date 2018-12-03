@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,19 +26,28 @@ namespace TimeTracker
         
         private SendTaskResultType sendTaskDataObj;
         private string sessionKey;
+        private ObservableCollection<string> TaskNameSuggestion;
+        private bool needsUpdate;
+        public ObservableCollection<string> TaskNames {
+            get{
+                return TaskNameSuggestion;
+            }
+        }
         
         private float taskTime;
 
         public AddTask(string sessionKeyIn)
         {
             InitializeComponent();
-
+            needsUpdate = false;
             sessionKey = sessionKeyIn;
         }
 
-        public AddTask(string sessionKeyIn, float taskTimeIn) : this(sessionKeyIn)
+        public AddTask(string sessionKeyIn, float taskTimeIn, ObservableCollection<string> taskNamesSuggestionIn) : this(sessionKeyIn)
         {
             this.taskTime = taskTimeIn;
+            TaskNameSuggestion = taskNamesSuggestionIn;
+            Grid.DataContext = this;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -69,8 +79,8 @@ namespace TimeTracker
                 {
 
                     MessageBox.Show("Successful Adding Task");
-                     TaskName.Clear();
-
+                     TaskName.Text="";
+                    needsUpdate = true;
                 }
 
                 else
@@ -138,5 +148,9 @@ namespace TimeTracker
 
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DialogResult = needsUpdate;
+        }
     }
 }
